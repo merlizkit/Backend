@@ -100,30 +100,49 @@ class ProductManager {
             console.log(error);
         }
     }
-
-    updateProduct(productId,updatedField){ // actualiza el producto y mantiene el id
-
+    
+    async updateProduct(productId,updatedField){ // actualiza el producto y mantiene el id
+        try {
+            
+        }
+        catch (error){
+            console.log(error);
+        }
     }
-
-    deleteProduct(productId){ // elimina el producto, con ese id, del archivo
-
+    
+    async deleteProduct(productId){ // elimina el producto, con ese id, del archivo
+        try {
+            const productsFile = await this.getProducts();
+            const idPosition = productsFile.findIndex(product => product.id === productId);
+            if(idPosition>-1){
+                productsFile.splice(idPosition,1);
+                await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
+                console.log(`Product id ${productId} has been deleted`)
+                return `Product id ${productId} has been deleted`
+            } else {
+                console.log(`Product id ${productId} does not exists`)
+                return `Product id ${productId} does not exists`
+            }
+        }
+        catch (error){
+            console.log(error);
+        }
     }
 }
 
 
 const manager = new ProductManager('./products.json')
-// manager.getProducts()
 const test = async ()=>{
-    // const getProducts = await manager.getProducts()
     // console.log('Primer consulta: ', getProducts);
-    await manager.addProduct('Silla pino','Silla de madera de pino barnizada',5000,'Sin imagen','PT001',0) // stock en 0 OK
-    await manager.addProduct('Silla madera algarrobo','Silla de madera de algarrobo',15000,'Sin imagen','PT001',5) // Error: codigo existente
-    await manager.addProduct('Silla madera blanca','Silla de madera de pino blanca',6000,'Sin imagen','PT002',10)
-    await manager.addProduct('Silla madera negra','Silla de madera de pino negra',6000,'Sin imagen','PT003',10)
-    await manager.addProduct('Silla madera roja','Silla de madera de pino roja',6000,'Sin imagen','PT004',10)
-    await manager.addProduct('Silla plastica blanca','Silla de PVC blanca',5000,'Sin imagen','PT005',10)
-    await manager.addProduct('Silla plastica negra','',5000,'Sin imagen','PT006',10) // Error: precio 0
-    console.log('getProducts: ', await manager.getProducts());
+    //await manager.addProduct('Silla pino','Silla de madera de pino barnizada',5000,'Sin imagen','PT001',0) // stock en 0 OK
+    //await manager.addProduct('Silla madera algarrobo','Silla de madera de algarrobo',15000,'Sin imagen','PT001',5) // Error: codigo existente
+    //await manager.addProduct('Silla madera blanca','Silla de madera de pino blanca',6000,'Sin imagen','PT002',10)
+    //await manager.addProduct('Silla madera negra','Silla de madera de pino negra',6000,'Sin imagen','PT003',10)
+    //await manager.addProduct('Silla madera roja','Silla de madera de pino roja',6000,'Sin imagen','PT004',10)
+    //await manager.addProduct('Silla plastica blanca','Silla de PVC blanca',5000,'Sin imagen','PT005',10)
+    //await manager.addProduct('Silla plastica negra','',5000,'Sin imagen','PT006',10) // Error: precio 0
+    //console.log('Id: ', await manager.getProductById(3));
+    await manager.deleteProduct(4);
+    console.log('Complete product list: ', await manager.getProducts());
 }
-
 test()
