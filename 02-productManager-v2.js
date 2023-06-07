@@ -89,7 +89,7 @@ class ProductManager {
             const productsFile = await this.getProducts();
             const idProduct = productsFile.find(product => product.id === productId)
             if (idProduct) {
-                console.log(idProduct)
+         //       console.log(idProduct)
                 return idProduct
             } else {
                 console.log(`The product id ${productId} does not exists`)
@@ -101,9 +101,26 @@ class ProductManager {
         }
     }
     
-    async updateProduct(productId,updatedField){ // actualiza el producto y mantiene el id
+    async updateProduct(productId,title, description, price, thumbnail, code, stock){ // actualiza el o los datos del producto y mantiene el id
         try {
-            
+            const productsFile = await this.getProducts();
+            const idPosition = productsFile.findIndex(product => product.id === productId);
+
+            if(idPosition > -1){
+                if(title!==''){productsFile[idPosition].title = title};
+                if(description!==''){productsFile[idPosition].description = description};
+                if(price>0){productsFile[idPosition].price = price};
+                if(thumbnail!==''){productsFile[idPosition].thumbnail = thumbnail};
+                if(code!==''){productsFile[idPosition].code = code};
+                if(stock>0){productsFile[idPosition].stock = stock};
+                
+                await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
+                console.log(`Product id ${productId} has been updated`);
+                return `Product id ${productId} has been updated`;
+            } else {
+                console.log(`Product id ${productId} does not exists`);
+                return `Product id ${productId} does not exists`;
+            }
         }
         catch (error){
             console.log(error);
@@ -141,8 +158,8 @@ const test = async ()=>{
     //await manager.addProduct('Silla madera roja','Silla de madera de pino roja',6000,'Sin imagen','PT004',10)
     //await manager.addProduct('Silla plastica blanca','Silla de PVC blanca',5000,'Sin imagen','PT005',10)
     //await manager.addProduct('Silla plastica negra','',5000,'Sin imagen','PT006',10) // Error: precio 0
-    //console.log('Id: ', await manager.getProductById(3));
-    await manager.deleteProduct(4);
-    console.log('Complete product list: ', await manager.getProducts());
+    await manager.updateProduct(3,'','',0,'','','');
+    console.log('Id: ', await manager.getProductById(3));
+    //console.log('Complete product list: ', await manager.getProducts());
 }
 test()
