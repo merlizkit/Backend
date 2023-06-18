@@ -223,23 +223,23 @@ const productUpd2 = {
 };
 
 const test = async ()=>{
-    console.log('Complete product list: ', await manager.getProducts());
-    await manager.addProduct(product1); // stock en 0 OK
-    await manager.addProduct(product2); // Error: codigo existente
-    await manager.addProduct(product3);
-    await manager.addProduct(product4);
-    await manager.addProduct(product5);
-    await manager.addProduct(product6);
-    await manager.addProduct(product7); // Error: sin descripción
-    console.log('Complete product list: ', await manager.getProducts());
-    await manager.getProductById(3);
-    await manager.getProductById(7);
-    await manager.updateProduct(productUpd1);
-    await manager.updateProduct(productUpd2);
-    await manager.getProductById(3);
-    await manager.deleteProduct(4);
-    await manager.deleteProduct(7);
-    console.log('Complete product list: ', await manager.getProducts());
-}
+     console.log('Complete product list: ', await manager.getProducts());
+     await manager.addProduct(product1); // stock en 0 OK
+     await manager.addProduct(product2); // Error: codigo existente
+     await manager.addProduct(product3);
+     await manager.addProduct(product4);
+     await manager.addProduct(product5);
+     await manager.addProduct(product6);
+     await manager.addProduct(product7); // Error: sin descripción
+     console.log('Complete product list: ', await manager.getProducts());
+     await manager.getProductById(3);
+     await manager.getProductById(7);
+     await manager.updateProduct(productUpd1);
+     await manager.updateProduct(productUpd2);
+     await manager.getProductById(3);
+     await manager.deleteProduct(4);
+     await manager.deleteProduct(7);
+     console.log('Complete product list: ', await manager.getProducts());
+ }
 
 test()
