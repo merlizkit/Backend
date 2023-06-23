@@ -37,21 +37,16 @@ router.get('/:pid', async(req, res) =>{
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', uploader.array('thumbnails'), async (req, res) => {
     try {
-        const {title, description, code, price, stock, category, thumbnails} = req.body;
+        const props = req.body;
+        const thumbs = req.files;
         const newProduct = {
-            title,
-            description,
-            code,
-            price,
-            status: true,
-            stock,
-            category,
-            thumbnails,
+            ...props,
+            thumbnails: []
         }
+        thumbs.forEach(file => newProduct.thumbnails.push(file.path));
         const addStatus = await productManager.addProduct(newProduct);
-        console.log(addStatus);
         if (addStatus === 'Error: missing parameters') {
             res.status(400).json({msg: `Check ${newProduct.code} parameters: only thumbnails can be empty and stock can be 0`});
         } else if (addStatus === 'Error: Code exists') {
