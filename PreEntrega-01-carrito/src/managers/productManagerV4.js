@@ -9,7 +9,7 @@ export default class ProductManager {
     async addProduct(product){
         try {
             const productsFile = await this.getProducts();
-            if (!product.title || !product.description || !product.code || product.price === 0 || product.stock <= 0 || !product.category) {
+            if (!product.title || !product.description || !product.code || product.price === 0 || product.stock < 0 || !product.category) {
                 // verifica que los valores no estén vacios, que el precio no sea 0 y el stock sea mayor o igual a 0.
                 return 'Error: missing parameters';
             } else {
@@ -89,7 +89,7 @@ export default class ProductManager {
             if (idProduct) {
                 return idProduct
             } else {
-                return `Error displaying product: id ${productId} does not exists`
+                return 'Error';
             }
         }
         catch (error){
@@ -108,7 +108,13 @@ export default class ProductManager {
                 if(idPosition > -1){
                     if(product.title){productsFile[idPosition].title = product.title};
                     if(product.description){productsFile[idPosition].description = product.description};
-                    if(product.code){productsFile[idPosition].code = product.code}; // falta validar que, si modifica el codigo, el nuevo codigo no exista ya.
+                    if(product.code){
+                        if(await this.#checkCode(product.code)) {
+                            return 'Error: code already in use';
+                        } else {
+                            productsFile[idPosition].code = product.code
+                        };
+                    };
                     if(product.price > 0){productsFile[idPosition].price = product.price};
                     if(product.status){productsFile[idPosition].status = product.status};
                     if(product.stock >=0){productsFile[idPosition].stock = product.stock};
@@ -118,7 +124,7 @@ export default class ProductManager {
                     await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
                     return 'OK';
                 } else {
-                    return 'Error';
+                    return 'Error: prodId not found';
                 }
             }
         }

@@ -71,19 +71,28 @@ export default class CartManager {
     }
     
     /* ------------- actualiza datos del carrito manteniendo el id ------------- */
-    async updateCart(cartId, cart){
+    async updateCart(cartId, prodId){
         try {
-            if(Object.keys(cart).length === 0) {
-                return 'Nothing to update'
+            const cartProd = {
+                prodId,
+                quantity: 1
+            }
+            if(!cartProd) {
+                return 'Error: nothing to add';
             } else {
                 const cartsFile = await this.getCarts();
-                const idPosition = cartsFile.findIndex(cart => cart.id === cartId);
-                if(idPosition > -1){
-                    if(cart.products){cartsFile.products.push(cart.products)};                    
+                const cartIdx = cartsFile.findIndex(cart => cart.id === cartId);
+                if(cartIdx > -1){
+                    const prodIdx = cartsFile[cartIdx].products.findIndex(product => product.prodId === cartProd.prodId);
+                    if(prodIdx > -1) {
+                        cartsFile[cartIdx].products[prodIdx].quantity++;
+                    } else {
+                        cartsFile[cartIdx].products.push(cartProd);
+                    }
                     await fs.promises.writeFile(this.path, JSON.stringify(cartsFile));
                     return 'OK';
                 } else {
-                    return 'Error';
+                    return 'Error: cart ID not found';
                 }
             }
         }

@@ -26,7 +26,7 @@ router.get('/:pid', async(req, res) =>{
         const {pid} = req.params;
         const prodID = Number(pid);
         const product = await productManager.getProductById(prodID);
-        if(product){
+        if(product.id == prodID){
             res.status(200).json(product);
         } else {
             res.status(400).send({msg: `Product id ${pid} does not exist`});
@@ -51,10 +51,11 @@ router.post('/', async (req, res) => {
             thumbnails,
         }
         const addStatus = await productManager.addProduct(newProduct);
-        if (addStatus.status === 'Error: missing parameters') {
+        console.log(addStatus);
+        if (addStatus === 'Error: missing parameters') {
             res.status(400).json({msg: `Check ${newProduct.code} parameters: only thumbnails can be empty and stock can be 0`});
-        } else if (addStatus.status === 'Error: Code exists') {
-            res.status(400).json({msg: `Could not create product ${product.code}: code already exists`});
+        } else if (addStatus === 'Error: Code exists') {
+            res.status(400).json({msg: `Could not create product ${newProduct.code}: code already exists`});
         } else {
             res.status(200).json({msg: `Product ${newProduct.code} created successfully`});
         }
@@ -72,8 +73,10 @@ router.put('/:pid', async (req,res) => {
         const updStatus = await productManager.updateProduct(prodID, productUpd);
         if(updStatus === 'OK') {
             res.status(200).json({msg: `Product id ${prodID} has been updated`});
-        } else {
+        } else if (updStatus === 'Error: prodId not found') {
             res.status(400).json({msg: `Update failed: Product id ${prodID} not found`});
+        } else {
+            res.status(400).json({msg: `Product code ${productUpd.code} already in use`});
         }
     }
     catch(error){

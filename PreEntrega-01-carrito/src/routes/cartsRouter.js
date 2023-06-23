@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import CartManager from '../managers/cartManagerV1.js';
+import ProductManager from '../managers/productManagerV4.js';
 
 const router = Router();
 const cartManager = new CartManager('./carts.json');
+const productManager = new ProductManager('./products.json');
 
 router.get('/:cid', async(req, res) =>{
     try{
@@ -31,11 +33,24 @@ router.post('/', async (req, res) => {
 });
 
 // terminar este
-router.post('/:cid/product/:pid', async (req, res) => {
+router.post('/:cid/products/:pid', async (req, res) => {
     try {
-        await updateCart(cartID, Cart)
-        const newCart = await cartManager.newCart();
-        res.status(200).json({msg: `Cart ${newCart.id} created successfully: ${newCart.products}`});
+        const {cid, pid} = req.params;
+        const cartID = Number(cid);
+        const prodID = Number(pid);
+        const prodExists = await productManager.getProductById(prodID);
+        if(prodExists.id == prodID) {
+            const updStatus = await cartManager.updateCart(cartID, prodID);
+            if(updStatus === 'OK'){
+                res.status(200).json({msg: `Product ${prodID} added to cart ${cartID}`});
+            } else if(updStatus === 'Error: nothing to add'){
+                res.status(400).send({msg: `No products to add to cart`});
+            } else {
+                res.status(400).send({msg: `Cart ${cartID} not found`});
+            }
+        } else {
+            res.status(404).send({msg: `Can't add to cart: product id ${prodID} does not exists`});
+        }
     }
     catch(error){
             res.status(500).send({msg: error.message});
