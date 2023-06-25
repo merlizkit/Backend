@@ -10,6 +10,8 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/products', productsRouter)
 app.use('/api/carts', cartsRouter)
 
-app.listen(8080, ()=>{
-    console.log('04: Server listening on port 8080');
+const PORT = 8080
+
+app.listen(PORT, ()=>{
+    console.log(`Server listening on port ${PORT}`);
 })

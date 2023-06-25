@@ -1,10 +1,11 @@
 import { Router } from 'express';
+import { __dirname } from '../utils.js';
 import CartManager from '../managers/cartManagerV1.js';
 import ProductManager from '../managers/productManagerV4.js';
 
 const router = Router();
-const cartManager = new CartManager('./carts.json');
-const productManager = new ProductManager('./products.json');
+const cartManager = new CartManager(__dirname + '/db/carts.json');
+const productManager = new ProductManager(__dirname + '/db/products.json');
 
 router.get('/:cid', async(req, res) =>{
     try{
@@ -56,5 +57,21 @@ router.post('/:cid/products/:pid', async (req, res) => {
             res.status(500).send({msg: error.message});
     }
 });
+
+router.delete('/:cid', async (req, res) => {
+    try {
+        const { cid } = req.params;
+        const cartID = Number(cid);
+        const delStatus = await cartManager.deleteCart(cartID);
+        if(delStatus === 'OK') {
+            res.status(200).json({msg: `Cart ${cartID} deleted successfully`});
+        } else {
+            res.status(404).json({msg: `Cart ${cartID} does not exist`});
+        }
+    }
+    catch(error) {
+        res.status(500).send({msg: error.message});
+    }
+})
 
 export default router;

@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import ProductManager from '../managers/productManagerV4.js';
 import { uploader } from '../middlewares/multer.js';
+import {__dirname} from '../utils.js';
+import ProductManager from '../managers/productManagerV4.js';
 
 const router = Router();
-const productManager = new ProductManager('./products.json');
+const productManager = new ProductManager( __dirname + '/db/products.json');
 
 router.get('/', async(req, res) =>{
     try {
@@ -39,20 +40,23 @@ router.get('/:pid', async(req, res) =>{
 
 router.post('/', uploader.array('thumbnails'), async (req, res) => {
     try {
-        const props = req.body;
-        const thumbs = req.files;
+        const prodData = req.body;
+        prodData.price = Number(prodData.price);
+        prodData.stock = Number(prodData.stock);
+        const prodThumbs = req.files;
         const newProduct = {
-            ...props,
+            ...prodData,
+            status: true,
             thumbnails: []
         }
-        thumbs.forEach(file => newProduct.thumbnails.push(file.path));
+        if(prodThumbs) prodThumbs.forEach(file => newProduct.thumbnails.push(file.path));
         const addStatus = await productManager.addProduct(newProduct);
         if (addStatus === 'Error: missing parameters') {
             res.status(400).json({msg: `Check ${newProduct.code} parameters: only thumbnails can be empty and stock can be 0`});
         } else if (addStatus === 'Error: Code exists') {
             res.status(400).json({msg: `Could not create product ${newProduct.code}: code already exists`});
         } else {
-            res.status(200).json({msg: `Product ${newProduct.code} created successfully`});
+            res.status(200).json([{msg: `Product ${newProduct.code} created successfully`}, addStatus]);
         }
     }
     catch(error){
@@ -66,12 +70,14 @@ router.put('/:pid', async (req,res) => {
         const prodID = Number(pid);
         const productUpd = req.body;
         const updStatus = await productManager.updateProduct(prodID, productUpd);
-        if(updStatus === 'OK') {
-            res.status(200).json({msg: `Product id ${prodID} has been updated`});
-        } else if (updStatus === 'Error: prodId not found') {
-            res.status(400).json({msg: `Update failed: Product id ${prodID} not found`});
+        if(updStatus === 'Error: code already in use') {
+            res.status(400).json(updStatus);
+        } else if (updStatus === 'Error: product ID not found') {
+            res.status(400).json(updStatus);
+        } else if (updStatus === 'Error: price must be greater than 0') {
+            res.status(400).json(updStatus);
         } else {
-            res.status(400).json({msg: `Product code ${productUpd.code} already in use`});
+            res.status(200).json([{msg: `Product id ${prodID} has been updated`}, updStatus]);
         }
     }
     catch(error){

@@ -102,7 +102,7 @@ export default class CartManager {
     }
     
     /* ------------------ elimina el carrito con el ID ingresado ------------------ */
-    async deleteCarts(cartId){
+    async deleteCart(cartId){
         try {
             const cartsFile = await this.getCarts();
             const idPosition = cartsFile.findIndex(cart => cart.id === cartId);

@@ -9,7 +9,7 @@ export default class ProductManager {
     async addProduct(product){
         try {
             const productsFile = await this.getProducts();
-            if (!product.title || !product.description || !product.code || product.price === 0 || product.stock < 0 || !product.category) {
+            if (!product.title || !product.description || !product.code || product.price == 0 || product.stock < 0 || !product.category) {
                 // verifica que los valores no estén vacios, que el precio no sea 0 y el stock sea mayor o igual a 0.
                 return 'Error: missing parameters';
             } else {
@@ -115,16 +115,16 @@ export default class ProductManager {
                             productsFile[idPosition].code = product.code
                         };
                     };
-                    if(product.price > 0){productsFile[idPosition].price = product.price};
+                    if(product.price > 0){productsFile[idPosition].price = product.price} else {return 'Error: price must be greater than 0';};
                     if(product.status){productsFile[idPosition].status = product.status};
                     if(product.stock >=0){productsFile[idPosition].stock = product.stock};
                     if(product.category){productsFile[idPosition].category = product.category};
                     if(product.thumbnails){productsFile[idPosition].thumbnails = product.thumbnails};
                     
                     await fs.promises.writeFile(this.path, JSON.stringify(productsFile));
-                    return 'OK';
+                    return productsFile[idPosition];
                 } else {
-                    return 'Error: prodId not found';
+                    return 'Error: product ID not found';
                 }
             }
         }
