@@ -33,7 +33,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// terminar este
 router.post('/:cid/products/:pid', async (req, res) => {
     try {
         const {cid, pid} = req.params;
