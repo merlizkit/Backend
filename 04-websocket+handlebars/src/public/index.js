@@ -5,10 +5,10 @@ socketClient.on('allProducts', (array) => {
     array.forEach(product => {
         prodInfo += `${product.code} - ${product.title} || Stock: ${product.stock} || Precio: ${product.price}</br>`;
     })
-    products.innerHTML = `Listado de productos </br> ${prodInfo}`;
+    products.innerHTML = `${prodInfo}`;
 })
 
-const form = document.getElementById('form');
+const creForm = document.getElementById('creForm');
 const inputTitle = document.getElementById('title');
 const inputDesc = document.getElementById('description');
 const inputCode = document.getElementById('code');
@@ -16,7 +16,7 @@ const inputPrice = document.getElementById('price');
 const inputStock = document.getElementById('stock');
 const inputCat = document.getElementById('category');
 
-form.onsubmit = (send) => {
+creForm.onsubmit = (send) => {
     send.preventDefault();
     const newProduct = {
         title: inputTitle.value,
@@ -27,4 +27,13 @@ form.onsubmit = (send) => {
         category: inputCat.value
     }
     socketClient.emit('newProduct', newProduct);
+
+}
+
+const delForm = document.getElementById('delForm');
+const prodId = document.getElementById('prodId');
+
+delForm.onsubmit = (send) => {
+    send.preventDefault();
+    socketClient.emit('deleteProduct', prodId);
 }

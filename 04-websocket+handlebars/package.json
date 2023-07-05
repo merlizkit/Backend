@@ -1,5 +1,5 @@
 {
-  "name": "preentrega-01-carrito",
+  "name": "desafio-04-websockets-handlebars",
   "version": "1.0.0",
   "main": "./src/server.js",
   "type": "module",

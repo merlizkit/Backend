@@ -5,7 +5,7 @@ import handlebars from 'express-handlebars';
 import productsRouter from './routes/productsRouter.js';
 import cartsRouter from './routes/cartsRouter.js';
 import viewsRouter from './routes/viewsRouter.js';
-import ProductManager from './managers/productManagerV4.js';
+import ProductManager from './managers/productManagerV4.1.js';
 
 const app = express();
 const productManager = new ProductManager(__dirname + '/db/products.json');
@@ -15,8 +15,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 
 app.engine('handlebars', handlebars.engine());
-app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/views');
 
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
@@ -39,8 +39,12 @@ socketServer.on('connection', async (socket) => {
     socket.emit('allProducts', await productManager.getProducts());
 
     socket.on('newProduct', async (obj) => {
-        const addStat = await productManager.addProduct(obj);
-        console.log(addStat);
-        socketServer.emit('allProducts', await productManager.getProducts);
+        await productManager.addProduct(obj);
+        socketServer.emit('allProducts', await productManager.getProducts());
+    })
+
+    socket.on('deleteProduct', async (prodId) => {
+        await productManager.deleteProduct(prodId);
+        socketServer.emit('allProducts', await productManager.getProducts());
     })
 })

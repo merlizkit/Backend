@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { uploader } from '../middlewares/multer.js';
 import {__dirname} from '../utils.js';
-import ProductManager from '../managers/productManagerV4.js';
+import ProductManager from '../managers/productManagerV4.1.js';
 
 const router = Router();
 const productManager = new ProductManager( __dirname + '/db/products.json');
@@ -88,7 +88,7 @@ router.put('/:pid', async (req,res) => {
 router.delete('/:pid', async (req,res) => {
     try {
         const {pid} = req.params;
-        const prodID = Number(pid);
+        const prodID = pid;
         const delStatus = await productManager.deleteProduct(prodID);
         if (delStatus === 'OK') {
             res.status(200).json({msg: `Product id ${prodID} has been deleted`});
