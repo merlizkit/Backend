@@ -35,5 +35,5 @@ const prodId = document.getElementById('prodId');
 
 delForm.onsubmit = (send) => {
     send.preventDefault();
-    socketClient.emit('deleteProduct', prodId);
+    socketClient.emit('deleteProduct', prodId.value);
 }

@@ -139,6 +139,7 @@ export default class ProductManager {
             const productsFile = await this.getProducts();
             const idPosition = productsFile.findIndex(product => product.id === Number(productId));
             const codePosition = productsFile.findIndex(product => product.code === productId);
+            console.log('deleteproduct '+productId);
             console.log(codePosition);
             console.log(idPosition);
             if(idPosition>-1){

@@ -43,8 +43,8 @@ socketServer.on('connection', async (socket) => {
         socketServer.emit('allProducts', await productManager.getProducts());
     })
 
-    socket.on('deleteProduct', async (prodId) => {
-        await productManager.deleteProduct(prodId);
+    socket.on('deleteProduct', async (producto) => {
+        await productManager.deleteProduct(producto);
         socketServer.emit('allProducts', await productManager.getProducts());
     })
 })
