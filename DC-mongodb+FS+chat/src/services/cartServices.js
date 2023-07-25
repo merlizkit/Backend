@@ -36,9 +36,9 @@ export const newCartServices = async (obj) => {
     }
 }
 
-export const updateCartServices = async (id, obj) => {   
+export const updateCartServices = async (cartId, prodId) => {   
     try {
-        const item = await cartDao.updateCart(id,obj);
+        const item = await cartDao.updateCart(cartId, prodId);
         return item;
     }
     catch (err) {

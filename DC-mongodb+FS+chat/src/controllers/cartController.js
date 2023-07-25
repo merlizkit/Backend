@@ -1,8 +1,8 @@
-import * as service from '../services/productServices.js';
+import * as service from '../services/cartServices.js';
 
 export const getAll = async (req, res, next) => {
         try {
-            const response = await service.getProductsServices();
+            const response = await service.getCartsServices();
             res.status(200).json(response);
         }
         catch (error) {
@@ -12,10 +12,10 @@ export const getAll = async (req, res, next) => {
 
 export const getById = async (req, res, next) => {
         try {
-            const { id } = req.params;
-            const prod = await service.getProductByIdServices(id);
-            if(!prod) res.status(404).json({msg: 'Product not found'});
-            else res.status(200).json(prod);
+            const id = req.params.cid;
+            const cart = await service.getCartByIdServices(id);
+            if(!cart) res.status(404).json({msg: 'Cart not found'});
+                else res.status(200).json(cart);
         }
         catch (error) {
             next(error.message);
@@ -24,9 +24,9 @@ export const getById = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
         try {
-            const newProd = await service.addProductServices(req.body);
-            if(!newProd) res.status(404).json({msg: 'Validation error'});
-            else res.status(200).json(newProd);
+            const newCart = await service.newCartServices({product: []});
+            if(!newCart) res.status(404).json({msg: 'Validation error'});
+            else res.status(200).json(newCart);
         }
         catch (error) {
             next(error.message);
@@ -35,9 +35,11 @@ export const create = async (req, res, next) => {
 
 export const update = async (req, res, next) => {
         try {
-            const { id } = req.params;
-            const prodUpd = await service.updateProductServices(id, req.body);
-            res.json(prodUpd);
+            const cartId = req.params.cid;
+            const prodId = req.params.pid;
+            const cartUpd = await service.updateCartServices(cartId, prodId);
+            if(!cartUpd) res.status(404).json({msg: 'Not found'});
+                else res.status(200).json(cartUpd);
         }
         catch (error) {
             next(error.message);
@@ -46,9 +48,10 @@ export const update = async (req, res, next) => {
 
 export const remove = async (req, res, next) => {
         try {
-            const { id } = req.params;
-            const prodDel = await service.deleteProductServices(id);
-            res.json(prodDel);
+            const id = req.params.cid;
+            const cartDel = await service.deleteCartServices(id);
+            if(!cartDel) res.status(404).json({msg: 'Not found'});
+                else res.status(200).json(cartDel);
         }
         catch (error) {
             next(error.message);

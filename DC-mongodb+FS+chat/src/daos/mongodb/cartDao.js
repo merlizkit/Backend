@@ -1,14 +1,11 @@
 import { CartModel } from "./models/cartModel.js";
+import { ProductModel } from "./models/productModel.js";
 
 export default class CartDaoMongoDB {
-    constructor (path) {
-        this.path = path
-        }
-        
-    /* -------------------------- crear nuevo carrito -------------------------- */
-    async newCart(){
+/* -------------------------- crear nuevo carrito -------------------------- */
+    async newCart(cart){
         try {
-            const response = await CartModel.create(cart);
+            const response = await CartModel.create({products: []});
             return response;
             }
             catch (error){
@@ -41,12 +38,19 @@ export default class CartDaoMongoDB {
     /* ------------- actualiza datos del carrito manteniendo el id ------------- */
     async updateCart(cartId, prodId){
         try {
-            const response = await CartModel.findOneAndUpdate( 
-                cartId, 
-                { $set: { "products.$[elem].quantity": +1 } },
-                { arrayFilters: [ {"elem.prodID": prodId} ] },
-                {new: true});
-            return response;
+            const findProd = await ProductModel.findById(prodId);
+            if(!findProd){
+                return 'Product does not exists';
+            } else {
+                const response = await CartModel.findOneAndUpdate( 
+                    { _id: cartId }, 
+                    { $set: { 'carts.products.quantity': +1 } },
+                    { arrayFilters: [ {'carts.products.prodID': prodId} ] },
+                    {new: true},
+                    {upsert: true});
+                console.log(response);
+                return response;
+            }
         }
         catch (error){
             console.log(error);

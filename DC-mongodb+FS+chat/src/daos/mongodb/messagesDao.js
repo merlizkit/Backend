@@ -12,7 +12,7 @@ export default class MessageDaoMongoDB {
 
     async getAll(){
         try {
-            const response = await ProductModel.find();
+            const response = await MessageModel.find();
             return response;
         } catch (error) {
           console.log(error);  

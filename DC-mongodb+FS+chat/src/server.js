@@ -30,8 +30,6 @@ app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
-app.use('/chat', viewsRouter);
-
 app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);
 app.use('/', viewsRouter);
@@ -53,6 +51,7 @@ socketServer.on('connection', async (socket) => {
     /* ---------------------------------- chat ---------------------------------- */
     socket.on('newUser', (user)=>{
         console.log(`>${user} inició sesión`);
+        console.dir(socketServer)
     })
 
     socket.on('chat:message', async(msg) =>{
@@ -69,12 +68,12 @@ socketServer.on('connection', async (socket) => {
     socket.on('chat:typing', (user)=>{
         socket.broadcast.emit('chat:typing', user)
     })
-    /* -------------------------------- chat end -------------------------------- */
     
+    /* -------------------------------- products -------------------------------- */
     socket.emit('allProducts', await productDao.getProducts());
 
-    socket.on('newProduct', async (obj) => {
-        await productDao.addProduct(obj);
+    socket.on('newProduct', async (prod) => {
+        await productDao.addProduct(prod);
         socketServer.emit('allProducts', await productDao.getProducts());
     })
 
