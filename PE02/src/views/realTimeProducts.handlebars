@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Productos en tiempo real</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h3>Crear nuevo producto</h3>
+                <form id="creForm">
+                    <label for="title" class="form-label">Titulo</label> <input type="text" class="form-control" id="title">
+                    <label for="description" class="form-label">Descripción</label> <input type="text" class="form-control" id="description">
+                    <label for="code" class="form-label">Codigo</label> <input type="text" class="form-control" id="code">
+                    <label for="price" class="form-label">Precio</label> <input type="number" class="form-control" id="price">
+                    <label for="stock" class="form-label">Stock</label> <input type="number" class="form-control" id="stock">
+                    <label for="category" class="form-label">Categoria</label> <input type="text" class="form-control" id="category">
+                <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            </div>
+            <div class="col-sm">
+                <h3>Listado de productos</h3>
+                <p class="mt-3 border-top" id="products"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <h3>Borrar producto</h3>
+                <form id="delForm">
+                    <label for="prodId" class="form-label">Ingrese el id o código a borrar</label> <input type="text" class="form-control" id="prodId">
+                <button type="submit" class="btn btn-primary">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
