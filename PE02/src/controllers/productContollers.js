@@ -2,7 +2,7 @@ import * as service from '../services/productServices.js';
 
 export const getAll = async (req, res, next) => {
         try {
-            const response = await service.getProductsServices();
+            const response = await service.getProductsServices(req.query);
             res.status(200).json(response);
         }
         catch (error) {
@@ -24,7 +24,6 @@ export const getById = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
         try {
-            console.log(req.body);
             const newProd = await service.addProductServices(req.body);
             if(!newProd) res.status(404).json({msg: 'Validation error'});
                 else res.status(200).json(newProd);
