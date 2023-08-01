@@ -61,7 +61,8 @@ export const updateProdQty = async (req,res,next) => {
 
 export const replaceCart = async (req,res,next) => {
     try {
-        
+        const {cid} = req.params;
+        const prods = req.body;
     }
     catch (error) {
         next(error.message);
