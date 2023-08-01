@@ -70,15 +70,15 @@ socketServer.on('connection', async (socket) => {
     })
     
     /* -------------------------------- products -------------------------------- */
-    socket.emit('allProducts', await productDao.getProducts());
+    // socket.emit('allProducts', await productDao.getProducts());
 
-    socket.on('newProduct', async (prod) => {
-        await productDao.addProduct(prod);
-        socketServer.emit('allProducts', await productDao.getProducts());
-    })
+    // socket.on('newProduct', async (prod) => {
+    //     await productDao.addProduct(prod);
+    //     socketServer.emit('allProducts', await productDao.getProducts());
+    // })
 
-    socket.on('deleteProduct', async (producto) => {
-        await productDao.deleteProduct(producto);
-        socketServer.emit('allProducts', await productDao.getProducts());
-    })
+    // socket.on('deleteProduct', async (producto) => {
+    //     await productDao.deleteProduct(producto);
+    //     socketServer.emit('allProducts', await productDao.getProducts());
+    // })
 })

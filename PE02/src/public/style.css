@@ -52,3 +52,10 @@ button{
 button:hover{
     background: #1ed106;
 }
+ul {
+    margin-top: 1rem;
+}
+
+ul, li {
+    margin-left: 2rem;
+}

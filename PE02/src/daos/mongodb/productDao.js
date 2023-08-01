@@ -42,7 +42,8 @@ export default class ProductDaoMongoDB {
             const options = {
                 limit: query.limit || 10,
                 page: query.page || 1,
-                sort: query.sort || null
+                sort: query.sort || null,
+                lean: true
             };
 
             const filter = {};
@@ -52,7 +53,7 @@ export default class ProductDaoMongoDB {
 
             const response = await ProductModel.paginate(filter,options);
 
-            let link = `http://localhost:8080/api/products/?limit=${response.limit}`;
+            let link = `http://localhost:8080/?limit=${response.limit}`;
             let queryLink = '';
             if (query.sort) queryLink += `&sort=${query.sort}`;
             if (query.stock) queryLink += `&stock=1`;
@@ -60,7 +61,6 @@ export default class ProductDaoMongoDB {
             if (query.status) queryLink += `&status=${query.status}`;
             if (response.hasPrevPage) {response.prevLink = link + `&page=${response.prevPage}` + queryLink} else {response.prevLink = null};
             if (response.hasNextPage) {response.nextLink = link + `&page=${response.nextPage}` + queryLink} else {response.nextLink = null};
-            //response.isValid= !(page<=0||page>result.totalPages)
 
             return response;
             }

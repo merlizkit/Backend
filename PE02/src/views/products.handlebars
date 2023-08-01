@@ -1,14 +1,14 @@
 <div class="container">
     <h2>Listado de productos</h2>
-    {{#if isValid}}
     <div>
         {{#each docs}}
-        <div>
-            <p>Code: {{this.code}} &nbsp; Titulo: {{this.title}} &nbsp; Descripcion: {{this.description}}</p>
-            <p>Precio: {{this.price}} &nbsp; Stock: {{this.stock}}</p>
-            <p>Categoría: {{this.category}}</p>
-            <p>Imagenes: {{this.thumbnails}}</p>
-        </div>
+        <ul class="container fs-4">Code: <strong>{{this.code}}</strong>
+            <li class="fs-5">Titulo: <strong>{{this.title}}</strong> - Descripcion: <strong>{{this.description}}</strong></li>
+            <li class="fs-5">Precio: <strong>{{this.price}}</strong></li>
+            <li class="fs-5">Stock: <strong>{{this.stock}}</strong></li>
+            <li class="fs-5">Categoría: <strong>{{this.category}}</strong></li>
+            <li class="fs-5">Imagenes: <strong>{{this.thumbnails}}</strong></li>
+        </ul>
         <br/>
         {{/each}}
     </div>
@@ -24,7 +24,4 @@
             <a href={{this.nextLink}}>Siguiente >></a>
         {{/if}} 
     </div>
-    {{else}}
-    <h1>No hay productos para mostrar</h1>
-    {{/if}}
 </div>
