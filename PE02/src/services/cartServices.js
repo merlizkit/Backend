@@ -56,6 +56,16 @@ export const updateProdQty = async (cartId, prodId, quantity) => {
     }
 }
 
+export const replaceCart = async (cartId, products) => {
+    try {
+        const updCart = await cartDao.replaceCart(cartId, products);
+        return updCart;
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 export const removeCart = async (id) => {   
     try {
         const item = await cartDao.removeCart(id);

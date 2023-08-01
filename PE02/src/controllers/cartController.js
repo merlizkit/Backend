@@ -63,6 +63,8 @@ export const replaceCart = async (req,res,next) => {
     try {
         const {cid} = req.params;
         const prods = req.body;
+        const updCart = await service.replaceCart(cid,prods);
+        return updCart;
     }
     catch (error) {
         next(error.message);

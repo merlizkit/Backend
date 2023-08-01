@@ -75,7 +75,22 @@ export default class CartDaoMongoDB {
             return response;
         }
         catch (error){
+            console.log(error);
+        }
+    }
 
+    /* ---------------- reemplazar todos los productos del carro ---------------- */
+    async replaceCart(cartId, products){
+        try {
+            const response = await CartModel.findOneAndUpdate(
+                { _id: cartId},
+                { products: products},
+                { new: true}
+            );
+            return response;
+        }
+        catch (error){
+            console.log(error);
         }
     }
 
