@@ -4,7 +4,7 @@ const cartDao = new CartDaoMongoDB();
 //import CartDaoFS from '../daos/filesystem/cartDao.js';
 //const cartDao = new CartDaoFS();
 
-export const getCartsServices = async () => {   
+export const getCarts = async () => {   
     try {
         const response = await cartDao.getCarts();
         return response;
@@ -14,7 +14,7 @@ export const getCartsServices = async () => {
     }
 }
 
-export const getCartByIdServices = async (id) => {   
+export const getCartById = async (id) => {   
     try {
         const item = await cartDao.getCartById(id);
         if(!item) return false;
@@ -25,7 +25,7 @@ export const getCartByIdServices = async (id) => {
     }
 }
 
-export const newCartServices = async (obj) => {   
+export const newCart = async (obj) => {   
     try {
         const newProd = await cartDao.newCart(obj);
         if(!newProd) return false;
@@ -36,9 +36,29 @@ export const newCartServices = async (obj) => {
     }
 }
 
-export const updateCartServices = async (cartId, prodId) => {   
+export const updateCart = async (cartId, prodId) => {   
     try {
-        const item = await cartDao.updateCart(cartId, prodId);
+        const cart = await cartDao.updateCart(cartId, prodId);
+        return cart;
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const updateProdQty = async (cartId, prodId, quantity) => {
+    try {
+        const cart = await cartDao.updateProdQty(cartId, prodId, quantity);
+        return cart;
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const removeCart = async (id) => {   
+    try {
+        const item = await cartDao.removeCart(id);
         return item;
     }
     catch (err) {
@@ -46,9 +66,9 @@ export const updateCartServices = async (cartId, prodId) => {
     }
 }
 
-export const deleteCartServices = async (id) => {   
+export const removeProd = async (cartId, prodId) => {   
     try {
-        const item = await cartDao.deleteCart(id);
+        const item = await cartDao.removeProd(cartId, prodId);
         return item;
     }
     catch (err) {

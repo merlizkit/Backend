@@ -42,14 +42,21 @@ export default class CartDaoMongoDB {
             if(!findProd){
                 return 'Product does not exists';
             } else {
+                const findProdInCart = await CartModel.findOne( { _id: cartId, 'products.prodId': prodId });
+                if(!!findProdInCart){
+                    const response = await CartModel.findOneAndUpdate( 
+                        { _id: cartId,
+                        'products.prodId': prodId }, 
+                        { $inc: { 'products.$.quantity': 1 } },
+                        {new: true});
+                    return response;
+                } else {
                 const response = await CartModel.findOneAndUpdate( 
                     { _id: cartId }, 
-                    { $set: { 'carts.products.quantity': +1 } },
-                    { arrayFilters: [ {'carts.products.prodID': prodId} ] },
-                    {new: true},
-                    {upsert: true});
-                console.log(response);
+                    { $push: { products: { prodId: prodId, quantity: 1 } } },
+                    {new: true});
                 return response;
+                }
             }
         }
         catch (error){
@@ -57,10 +64,39 @@ export default class CartDaoMongoDB {
         }
     }
     
+    /* -------------------- actualiza la cantidad del carrito ------------------- */
+    async updateProdQty(cartId, prodId, quantity){
+        try {
+            const response = await CartModel.findOneAndUpdate( 
+                { _id: cartId,
+                'products.prodId': prodId }, 
+                { 'products.$.quantity': quantity },
+                {new: true});
+            return response;
+        }
+        catch (error){
+
+        }
+    }
+
     /* ------------------ elimina el carrito con el ID ingresado ------------------ */
-    async deleteCart(cartId){
+    async removeCart(cartId){
         try {
             const response = await CartModel.findByIdAndDelete(cartId);
+            return response;
+        }
+        catch (error){
+            console.log(error);
+        }
+    }
+
+    /* ------------------ elimina producto del carrito ------------------ */
+    async removeProd(cartId, prodId){
+        try {
+            const response = await CartModel.findOneAndUpdate( 
+                { _id: cartId }, 
+                { $pull: { products: { prodId: prodId} } }, 
+                { new: true } );
             return response;
         }
         catch (error){
