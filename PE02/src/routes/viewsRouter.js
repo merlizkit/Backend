@@ -5,6 +5,7 @@ const router = Router();
 router.get('/', (req,res) => {
     res.render('index')
 })
+router.get('/cart/:cid', controller.getCart);
 router.get('/products', controller.getProducts);
 router.get('/chat', (req, res) => {
     res.render('chat')

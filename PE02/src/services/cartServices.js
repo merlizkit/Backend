@@ -76,6 +76,16 @@ export const removeCart = async (id) => {
     }
 }
 
+export const emptyCart = async (id) => {   
+    try {
+        const item = await cartDao.emptyCart(id);
+        return item;
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 export const removeProd = async (cartId, prodId) => {   
     try {
         const item = await cartDao.removeProd(cartId, prodId);

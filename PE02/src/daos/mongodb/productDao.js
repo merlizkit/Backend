@@ -53,7 +53,7 @@ export default class ProductDaoMongoDB {
 
             const response = await ProductModel.paginate(filter,options);
 
-            let link = `http://localhost:8080/?limit=${response.limit}`;
+            let link = `http://localhost:8080/products/?limit=${response.limit}`;
             let queryLink = '';
             if (query.sort) queryLink += `&sort=${query.sort}`;
             if (query.stock) queryLink += `&stock=1`;

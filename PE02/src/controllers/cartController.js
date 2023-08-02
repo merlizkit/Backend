@@ -83,6 +83,18 @@ export const removeCart = async (req, res, next) => {
     }
 }
 
+export const emptyCart = async (req, res, next) => {
+    try {
+        const { cid } = req.params;
+        const cartDel = await service.emptyCart(cid);
+        if(!cartDel) res.status(404).json({msg: 'Not found'});
+            else res.status(200).json(cartDel);
+    }
+    catch (error) {
+        next(error.message);
+    }
+}
+
 export const removeProd = async (req, res, next) => {
     try {
         const { pid, cid} = req.params;

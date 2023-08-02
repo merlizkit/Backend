@@ -28,7 +28,7 @@ export default class CartDaoMongoDB {
     async getCartById(cartId){
         try {
             const response = await CartModel.findById(cartId).populate('products.prodId');
-            return response;
+            return response.toObject();
         }
         catch (error){
             console.log(error);
@@ -98,6 +98,21 @@ export default class CartDaoMongoDB {
     async removeCart(cartId){
         try {
             const response = await CartModel.findByIdAndDelete(cartId);
+            return response;
+        }
+        catch (error){
+            console.log(error);
+        }
+    }
+
+    /* ------------------ vacía el carrito con el ID ingresado ------------------ */
+    async emptyCart(cartId){
+        try {
+            const response = await CartModel.findOneAndUpdate(
+                { _id: cartId},
+                { products: [] },
+                {new: true}
+            );
             return response;
         }
         catch (error){
