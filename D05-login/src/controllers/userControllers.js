@@ -28,3 +28,10 @@ export const loginUser = async(req, res) => {
         console.log(error);
     }
 };
+
+export const logout = (req, res) => {
+    req.session.destroy((err) => {
+        if(!err) res.json({ msg: 'Logout ok!' });
+        else res.json({ msg: err });
+    })
+};
