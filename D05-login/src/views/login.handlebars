@@ -1,0 +1,28 @@
+<h1>LOGIN</h1>
+
+{{!-- <form action='/users/login' method='post'>
+  Email: <input type='email' name='email' id='email' />
+  Password: <input type='password' name='password' id='password' />
+  <div>
+    <input type='submit' value='LOGIN' />
+  </div>
+</form> --}}
+
+<div class="container w-50">
+    <form id="login" action='/users/login' method='post'>
+        <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="email">
+        </div>
+        <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary">LOGIN</button>
+    </form>
+</div>
+
+<h2>USUARIO NUEVO?</h2>
+<div class="container w-50">
+  <button onclick="location.href='/register'" class="btn btn-primary">Ir a registro</button>
+</div>
