@@ -31,7 +31,7 @@ export const loginUser = async(req, res) => {
 
 export const logout = (req, res) => {
     req.session.destroy((err) => {
-        if(!err) res.json({ msg: 'Logout ok!' });
+        if(!err) res.redirect('/');
         else res.json({ msg: err });
     })
 };
