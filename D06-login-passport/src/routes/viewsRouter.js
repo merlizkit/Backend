@@ -7,7 +7,7 @@ router.get('/', (req,res) => {
     res.render('login')
 });
 router.get('/cart/:cid', controller.getCart);
-router.get('/products', userSession, controller.getProducts);
+router.get('/products', controller.getProducts);
 router.get('/chat', (req, res) => { res.render('chat') });
 
 router.get('/login', controller.login);

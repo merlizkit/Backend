@@ -1,30 +1,26 @@
 import UserDao from "../daos/mongodb/userDao.js";
 const userDao = new UserDao();
 
-export const registerUser = async(req, res) => {
+export const registerResponse = (req, res, next) => {
     try {
-        const newUser = await userDao.registerUser(req.body);
-        if(newUser) res.redirect('/login');
-        else res.redirect('/error-register');
+      res.json({
+        msg: "Register ok",
+        session: req.session,
+      });
     } catch (error) {
-        console.log(error);
+      next(error.message);
     }
 };
 
-export const loginUser = async(req, res) => {
+export const loginResponse = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
-        const user = await userDao.loginUser(req.body);
-        if(user) {
-            req.session.info = {
-                loggedIn: true,
-                email: user.email,
-                admin: user.admin
-            };
-            res.redirect('/products')
-        } else res.redirect('/error-login')
+      const user = await userDao.getById(req.session.passport.user);
+      res.json({
+        msg: "Login ok",
+        user,
+      });
     } catch (error) {
-        console.log(error);
+      next(error.message);
     }
 };
 
@@ -34,3 +30,22 @@ export const logout = (req, res) => {
         else res.json({ msg: err });
     })
 };
+
+export const githubResponse = async (req, res, next) => {
+    try {
+      // console.log(req.user)
+      const { first_name, last_name, email, isGithub } = req.user;
+      res.json({
+        msg: "Register/Login Github OK",
+        session: req.session,
+        userData: {
+          first_name,
+          last_name,
+          email,
+          isGithub,
+        },
+      });
+    } catch (error) {
+      next(error.message);
+    }
+  };
