@@ -47,11 +47,9 @@ export const initializePassport = () => {
                         email: profile._json.email,
                         password: ''
                     }
-                    console.log('pass new user', newUser);
                     const result = await userDao.registerUser(newUser);
                     return done(null, result);
                 } else {
-                    console.log('pass login', userExists);
                     return done(null, userExists);
                 };
             }

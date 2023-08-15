@@ -3,6 +3,7 @@ import * as service from '../services/productServices.js';
 export const getAll = async (req, res, next) => {
         try {
             const response = await service.getProducts(req.query);
+            console.log('pc', req.session);
             res.status(200).json(response);
         }
         catch (error) {
