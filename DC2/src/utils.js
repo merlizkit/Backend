@@ -11,10 +11,10 @@ export const mongoStoreOptions = {
     store: MongoStore.create({
         mongoUrl: connectionString,
         crypto: {
-            secret: '1234'
+            secret: process.env.SECRET_MONGO
         }
     }),
-    secret: '1234',
+    secret: process.env.SECRET_MONGO,
     resave: false,
     saveUninitialized: false,
     cookie: {
