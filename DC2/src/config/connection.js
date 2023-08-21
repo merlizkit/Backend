@@ -1,9 +1,8 @@
 import { connect } from 'mongoose';
-
-export const connectionString = 'mongodb+srv://merlizkit:bZUv7mHw1x3xDcot@cluster0.rfy1ojm.mongodb.net/ecommerce?retryWrites=true&w=majority'
+import 'dotenv/config';
 
 try {
-    await connect(connectionString);
+    await connect(process.env.MONGO_ATLAS_URL);
     console.log('Conectado a la base de datos de MongoDB');
 } catch (error) {
     console.log(error);

@@ -8,6 +8,7 @@ import passport from 'passport';
 import { initializePassport } from './config/passportConfig.js';
 import { Server } from 'socket.io';
 import handlebars from 'express-handlebars';
+import 'dotenv/config';
 import MainRouter from './routes/index.js';
 const mainRouter = new MainRouter();
 import MessagesDaoMongoDB from "./daos/mongodb/messagesDao.js";
@@ -39,7 +40,7 @@ app
     
 initializePassport();
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080;
 const httpServer = app.listen(PORT, ()=>{
     console.log(`Server listening on port ${PORT}`);
 });

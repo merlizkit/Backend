@@ -2,6 +2,8 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import UserDao from "../daos/mongodb/userDao.js";
+import 'dotenv/config';
+
 
 const userDao = new UserDao();
 
@@ -33,8 +35,8 @@ export const initializePassport = () => {
     ))
 
     passport.use('github', new GitHubStrategy({
-        clientID: 'Iv1.0ce49a68f8a11f8c',
-        clientSecret: '75180d08f8983d572bcc9d6b39f2a3bbdefd3c36',
+        clientID: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
         callbackURL: 'http://localhost:8080/users/githubcallback'
         }, async (accessToken, refreshToken, profile, done) => {
             try {
