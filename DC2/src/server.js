@@ -8,10 +8,8 @@ import passport from 'passport';
 import { initializePassport } from './config/passportConfig.js';
 import { Server } from 'socket.io';
 import handlebars from 'express-handlebars';
-import productsRouter from './routes/productsRouter.js';
-import cartsRouter from './routes/cartsRouter.js';
-import viewsRouter from './routes/viewsRouter.js';
-import userRouter from './routes/usersRouter.js';
+import MainRouter from './routes/index.js';
+const mainRouter = new MainRouter();
 import MessagesDaoMongoDB from "./daos/mongodb/messagesDao.js";
 const messagesDao = new MessagesDaoMongoDB();
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
@@ -21,26 +19,25 @@ const messagesDao = new MessagesDaoMongoDB();
 
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'));
-app.use(errorHandler);
-app.use(morgan('dev'));
+app
+    .use(express.json())
+    .use(express.urlencoded({extended: true}))
+    .use(express.static(__dirname + '/public'))
+    .use(errorHandler)
+    .use(morgan('dev'))
 
-app.engine('handlebars', handlebars.engine());
-app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/views');
+    .engine('handlebars', handlebars.engine())
+    .set('view engine', 'handlebars')
+    .set('views', __dirname + '/views')
 
-app.use(cookieParser());
-app.use(session(mongoStoreOptions));
+    .use(cookieParser())
+    .use(session(mongoStoreOptions))
+    .use(passport.initialize())
+    .use(passport.session())
+    
+    .use('/', mainRouter.getRouter())
+    
 initializePassport();
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use('/api/products', productsRouter);
-app.use('/api/carts', cartsRouter);
-app.use('/users', userRouter);
-app.use('/', viewsRouter);
 
 const PORT = 8080
 const httpServer = app.listen(PORT, ()=>{

@@ -1,10 +1,11 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+export const __dirname = dirname(fileURLToPath(import.meta.url));
+
 import { hashSync, compareSync, genSaltSync } from 'bcrypt';
 import MongoStore from 'connect-mongo';
 import { connectionString } from './config/connection.js';
 
-export const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const mongoStoreOptions = {
     store: MongoStore.create({
@@ -23,3 +24,5 @@ export const mongoStoreOptions = {
 
 export const createHash = password => hashSync(password, genSaltSync(10));
 export const isValidPassword = (password, user) => compareSync(password, user.password);
+
+export const createResponse = (res, statusCode, data) => { return res.status(statusCode).json({data}); };
