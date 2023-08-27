@@ -1,10 +1,9 @@
-import UserDao from "../daos/mongodb/userDao.js";
-const userDao = new UserDao();
+import * as service from '../services/userServices.js';
 
 export const response = async (req, res, next) => {
     try {
-        const user = await userDao.getById(req.session.passport.user);
-        res.toObject(user);
+        const user = await service.getById(req.session.passport.user);
+        res.json(user);
     } catch (error) {
       next(error.message);
     }

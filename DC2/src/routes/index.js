@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
-import productsRouter from './routes/productsRouter.js';
-import cartsRouter from './routes/cartsRouter.js';
-import viewsRouter from './routes/viewsRouter.js';
-import userRouter from './routes/usersRouter.js';
+import productsRouter from './productsRouter.js';
+import cartsRouter from './cartsRouter.js';
+import sessionsRouter from './sessionsRouter.js';
+import viewsRouter from './viewsRouter.js';
+import userRouter from './usersRouter.js';
 
 export default class MainRouter {
     constructor() {
@@ -15,6 +16,7 @@ export default class MainRouter {
         this.router
             .use('/api/products', productsRouter)
             .use('/api/carts', cartsRouter)
+            .use('/api/session', sessionsRouter)
             .use('/users', userRouter)
             .use('/', viewsRouter)
     }

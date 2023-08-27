@@ -27,9 +27,9 @@ export const getCartById = async (id) => {
 
 export const newCart = async (obj) => {   
     try {
-        const newProd = await cartDao.newCart(obj);
-        if(!newProd) return false;
-        else return newProd;
+        const newCart = await cartDao.newCart(obj);
+        if(!newCart) return false;
+        else return newCart;
     }
     catch (err) {
         console.log(err);

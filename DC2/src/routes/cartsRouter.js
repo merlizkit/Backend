@@ -4,12 +4,13 @@ import * as cartController from '../controllers/cartController.js';
 
 const router = Router();
 
-router.get('/:cid', cartController.getById);
-router.post('/', cartController.create);
-router.post('/:cid/products/:pid', cartController.updateCart);
-router.put('/:cid', cartController.replaceCart);
-router.put('/:cid/products/:pid', cartController.updateProdQty);
-router.delete('/:cid', cartController.emptyCart);
-router.delete('/:cid/products/:pid', cartController.removeProd);
+router
+    .get('/:cid', cartController.getById)
+    .post('/', cartController.create)
+    .post('/:cid/products/:pid', cartController.updateCart)
+    .put('/:cid', cartController.replaceCart)
+    .put('/:cid/products/:pid', cartController.updateProdQty)
+    .delete('/:cid', cartController.emptyCart)
+    .delete('/:cid/products/:pid', cartController.removeProd)
 
 export default router;

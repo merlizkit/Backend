@@ -13,3 +13,12 @@ export const getUserSession = async (user) => {
         console.log(err);
     }
 }
+
+export const getById = async (req, res, next) => {
+    try {
+        const user = await userDao.getById(req.session.passport.user);
+        res.toObject(user);
+    } catch (error) {
+      next(error.message);
+    }
+};
