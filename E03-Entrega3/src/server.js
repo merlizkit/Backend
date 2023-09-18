@@ -57,7 +57,6 @@ socketServer.on('connection', async (socket) => {
     /* ---------------------------------- chat ---------------------------------- */
     socket.on('newUser', (user)=>{
         console.log(`>${user} inició sesión`);
-        console.dir(socketServer)
     })
 
     socket.on('chat:message', async(msg) =>{

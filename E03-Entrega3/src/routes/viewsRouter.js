@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as controller from '../controllers/viewControllers.js';
 import { sessionData } from '../middlewares/sessionData.js';
+import { isAuth } from '../middlewares/isAuth.js';
 const router = Router();
 
 router
@@ -9,7 +10,7 @@ router
     })
     .get('/cart/:cid', controller.getCart)
     .get('/products', sessionData, controller.getProducts)
-    .get('/chat', (req, res) => { res.render('chat') })
+    .get('/chat', isAuth, (req, res) => { res.render('chat') })
     .get('/login', controller.login)
     .get('/register', controller.register)
     .get('/error-login', controller.errorLogin)

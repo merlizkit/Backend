@@ -10,7 +10,13 @@ export const getByIdDTO = async (req, res, next) => {
             res.json(user);
         }
     } catch (error) {
-      next(error.message);
+        if(!req.path) {
+            if(req.path == '/current') {
+                next(error.message);
+            } else {
+                console.log(error);
+            }
+        } else console.log(error);
     }
 };
 

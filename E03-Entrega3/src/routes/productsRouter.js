@@ -3,6 +3,7 @@ import { uploader } from '../middlewares/multer.js';
 import {__dirname} from '../utils.js';
 import * as controller from '../controllers/productContollers.js';
 import { isAuth } from '../middlewares/isAuth.js';
+import { getByIdDTO } from '../controllers/userControllers.js';
 
 const router = Router();
 
