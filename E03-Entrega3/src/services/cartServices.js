@@ -1,4 +1,4 @@
-import CartDaoMongoDB from "../daos/mongodb/cartDao.js";
+import CartDaoMongoDB from "../persistence/daos/mongodb/cartDao.js";
 const cartDao = new CartDaoMongoDB();
 
 //import CartDaoFS from '../daos/filesystem/cartDao.js';

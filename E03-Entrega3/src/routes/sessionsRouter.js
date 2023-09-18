@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { __dirname } from '../utils.js';
 import { isAuth } from '../middlewares/isAuth.js';
-import { userSession } from '../middlewares/sessionData.js';
+import { getByIdDTO } from "../controllers/userControllers.js";
 
 const router = Router();
 
 router
-    .get('/current', userSession, isAuth, (req,res) => {
+    .get('/current', getByIdDTO, isAuth, (req,res) => {
         res.render('profile');
     })
 

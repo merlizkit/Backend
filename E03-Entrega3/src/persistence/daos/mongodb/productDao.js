@@ -1,6 +1,10 @@
-import { __dirname } from "../../utils.js";
+//import MongoDao from "./mongoDao.js";
 import { ProductModel } from "./models/productModel.js";
 
+// export default class ProductDaoMongoDB extends MongoDao {
+//     constructor() {
+//         super(ProductModel);
+//     }
 export default class ProductDaoMongoDB {
     /* -------------------------- crear nuevo producto -------------------------- */
     async addProduct(product){

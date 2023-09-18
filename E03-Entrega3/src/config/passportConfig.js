@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GitHubStrategy } from 'passport-github2';
-import UserDao from "../daos/mongodb/userDao.js";
+import UserDao from "../persistence/daos/mongodb/userDao.js";
 import 'dotenv/config';
 
 

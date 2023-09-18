@@ -4,7 +4,7 @@ export const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import { hashSync, compareSync, genSaltSync } from 'bcrypt';
 import MongoStore from 'connect-mongo';
-import { connectionString } from './config/connection.js';
+import { connectionString } from './persistence/daos/mongodb/connection.js';
 
 
 export const mongoStoreOptions = {

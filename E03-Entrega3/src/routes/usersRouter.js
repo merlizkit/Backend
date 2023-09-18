@@ -1,19 +1,20 @@
 import { Router } from "express";
-import { response, logout } from "../controllers/userControllers.js";
+import { getByIdDTO, logout } from "../controllers/userControllers.js";
 import passport from 'passport';
 import { isAuth } from '../middlewares/isAuth.js';
+import { create } from "../controllers/cartController.js";
 const router = Router();
 
 router
     .post('/register', passport.authenticate('register',{
         failureRedirect:'/error-register',
         successRedirect:'/login'
-    }), response)
+    }), create)
 
     .post('/login', passport.authenticate('login',{
         failureRedirect:'/error-login',
         successRedirect: '/products'
-    }), response)
+    }), getByIdDTO)
 
     .post('/logout', logout)
     .post('/private', isAuth, (req, res) => res.send('route private'))
@@ -24,7 +25,7 @@ router
         failureRedirect:'/error-login',
         successRedirect: '/products',
         passReqToCallback: true
-    }), response)
+    }), getByIdDTO)
 
 
 export default router;

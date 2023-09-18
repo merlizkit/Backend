@@ -1,9 +1,14 @@
 import * as service from '../services/userServices.js';
 
-export const response = async (req, res, next) => {
+export const getByIdDTO = async (req, res, next) => {
     try {
-        const user = await service.getById(req.session.passport.user);
-        res.json(user);
+        const user = await service.getByIdDTO(req.user.id);
+        if(req.path == '/current') {
+            res.locals.user = user;
+            next();
+        } else {
+            res.json(user);
+        }
     } catch (error) {
       next(error.message);
     }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import * as controller from '../controllers/viewControllers.js';
-import { userSession } from '../middlewares/sessionData.js';
+import { sessionData } from '../middlewares/sessionData.js';
 const router = Router();
 
 router
@@ -8,7 +8,7 @@ router
     res.render('login')
     })
     .get('/cart/:cid', controller.getCart)
-    .get('/products', userSession, controller.getProducts)
+    .get('/products', sessionData, controller.getProducts)
     .get('/chat', (req, res) => { res.render('chat') })
     .get('/login', controller.login)
     .get('/register', controller.register)

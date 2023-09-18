@@ -11,7 +11,7 @@ import handlebars from 'express-handlebars';
 import 'dotenv/config';
 import MainRouter from './routes/index.js';
 const mainRouter = new MainRouter();
-import MessagesDaoMongoDB from "./daos/mongodb/messagesDao.js";
+import MessagesDaoMongoDB from "./persistence/daos/mongodb/messagesDao.js";
 const messagesDao = new MessagesDaoMongoDB();
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
 //import MessagesDaoFS from '../daos/filesystem/messagesDao.js';

@@ -1,4 +1,4 @@
-import { createHash, isValidPassword } from "../../utils.js";
+import { createHash, isValidPassword } from "../../../utils.js";
 import { UserModel } from "./models/userModel.js";
 import 'dotenv/config';
 
