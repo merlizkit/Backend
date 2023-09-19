@@ -105,3 +105,11 @@ export const removeProd = async (req, res, next) => {
         next(error.message);
     }
 }
+
+export const createTicket = async (req, res, next) => {
+    try {
+        
+    } catch (error) {
+        next(error.message);
+    }
+}

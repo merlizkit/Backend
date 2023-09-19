@@ -3,7 +3,7 @@ import { ProductModel } from "./models/productModel.js";
 
 export default class CartDaoMongoDB {
 /* -------------------------- crear nuevo carrito -------------------------- */
-    async newCart(cart){
+    async newCart(){
         try {
             const response = await CartModel.create({products: []});
             return response;

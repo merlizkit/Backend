@@ -5,10 +5,8 @@ import { isAuth } from '../middlewares/isAuth.js';
 const router = Router();
 
 router
-    .get('/', (req,res) => { 
-    res.render('login')
-    })
-    .get('/cart/:cid', controller.getCart)
+    .get('/', (req,res) => { res.render('login')})
+    .get('/cart/:cid', sessionData, controller.getCart)
     .get('/products', sessionData, controller.getProducts)
     .get('/chat', isAuth, (req, res) => { res.render('chat') })
     .get('/login', controller.login)

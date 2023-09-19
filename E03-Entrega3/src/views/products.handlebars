@@ -7,12 +7,14 @@
             <div class="col">
                 <div class="card mb-3">
                     <div class="card-body card-bg-color">
-                        <h5 class="card-title">Code: <strong>{{this.code}}</strong></h5>
-                        <p class="card-text">Titulo: <strong>{{this.title}}</strong> - Descripción: <strong>{{this.description}}</strong></p>
-                        <p class="card-text">Precio: <strong>{{this.price}}</strong></p>
-                        <p class="card-text">Stock: <strong>{{this.stock}}</strong></p>
-                        <p class="card-text">Categoría: <strong>{{this.category}}</strong></p>
-                        <button type="submit" action="api/carts/64c84f6ab338474a4bf98594/products/{{this._id}}" formmethod="POST" class="btn btn-light">Agregar al carrito</button>
+                        <form action="api/carts/{{user.cartId}}/products/{{this._id}}" method="POST" >
+                            <h5 class="card-title">Codigo: <strong>{{this.code}}</strong></h5>
+                            <p class="card-text">Titulo: <strong>{{this.title}}</strong> - Descripción: <strong>{{this.description}}</strong></p>
+                            <p class="card-text">Precio: <strong>{{this.price}}</strong></p>
+                            <p class="card-text">Stock: <strong>{{this.stock}}</strong></p>
+                            <p class="card-text">Categoría: <strong>{{this.category}}</strong></p>
+                            <button type="submit" class="btn btn-light">Agregar al carrito</button>
+                        </form>
                     </div>
                 </div>
             </div>

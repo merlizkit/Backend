@@ -1,6 +1,8 @@
 import { createHash, isValidPassword } from "../../../utils.js";
 import { UserModel } from "./models/userModel.js";
+import CartDaoMongoDB from "./cartDao.js";
 import 'dotenv/config';
+const cartDao = new CartDaoMongoDB();
 
 export default class UserDao {
     async registerUser(user) {
@@ -8,16 +10,20 @@ export default class UserDao {
             const { email, password } = user;
             const existUser = await this.getByEmail(email);
             if(!existUser) {
+                const cart = await cartDao.newCart();
+                console.log(cart.id);
                 if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
                     return await UserModel.create({
                         ...user,
                         password: createHash(password),
+                        cartId: cart._id,
                         role: 'admin'
                     });
                 }
                 return await UserModel.create({
                     ...user,
-                    password: createHash(password)
+                    password: createHash(password),
+                    cartId: cart._id
                 });
             } else return false;
         } catch (error) {
