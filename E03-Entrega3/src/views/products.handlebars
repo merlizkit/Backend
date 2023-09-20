@@ -7,7 +7,7 @@
             <div class="col">
                 <div class="card mb-3">
                     <div class="card-body card-bg-color">
-                        <form action="api/carts/{{user.cartId}}/products/{{this._id}}" method="POST" >
+                        <form action="api/carts/{{req.user}}/products/{{this._id}}" method="POST" >
                             <h5 class="card-title">Codigo: <strong>{{this.code}}</strong></h5>
                             <p class="card-text">Titulo: <strong>{{this.title}}</strong> - Descripción: <strong>{{this.description}}</strong></p>
                             <p class="card-text">Precio: <strong>{{this.price}}</strong></p>

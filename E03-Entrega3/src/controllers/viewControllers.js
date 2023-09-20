@@ -7,7 +7,7 @@ export const getProducts = async (req, res, next) => {
         // const { user: userId } = req.session?.passport || { user: null };
         // const user = await userService.getById(userId);
         const response = await prodService.getProducts(req.query);
-        res.render('products', response);
+        res.render('products', response );
     }
     catch (error) {
         console.log(error);
