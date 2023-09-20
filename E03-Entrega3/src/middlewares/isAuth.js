@@ -2,7 +2,8 @@ import { getByIdDTO } from "../services/userServices.js";
 
 export const isAuth = async (req,res,next) => {
     try {
-        const user = await getByIdDTO(req.user.id);
+        const { id: userId } = req.user;
+        const user = await getByIdDTO(userId);
         if(req.method != 'GET') {
             if(req.baseUrl === '/api/products') {
                 if(req.isAuthenticated() && user.role == 'admin') return next();

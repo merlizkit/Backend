@@ -14,7 +14,7 @@ router
     .post('/:cid/products/:pid', isAuth, sessionData, cartController.updateCart)
     .put('/:cid', isAuth, cartController.replaceCart)
     .put('/:cid/products/:pid', isAuth, cartController.updateProdQty)
-    .put('/:cid/purchase', isAuth, ticketController.create)
+    .put('/:cid/purchase', isAuth, ticketController.generateTicket)
     .delete('/:cid', isAuth, cartController.emptyCart)
     .delete('/:cid/products/:pid', isAuth, cartController.removeProd)
 
