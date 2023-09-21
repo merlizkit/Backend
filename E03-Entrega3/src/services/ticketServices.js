@@ -17,6 +17,7 @@ export default class TicketService extends Services {
             const user = await userRepository.getByIdDTO(userId);
             if(!user) return false;
             let amountAcc = 0;
+            let cartError = [];
             const cart = await getCartById(user.cartId);
             for (const prod of cart.products) {
                 const idProd = prod.prodId;
@@ -25,20 +26,32 @@ export default class TicketService extends Services {
                     const amount = prod.quantity * prodDB.price;
                     amountAcc += amount;
                     removeProd(user.cartId, idProd)
+                    const newStock = prodDB.stock - prod.quantity
+                    productDao.updateProduct(idProd, {"stock": newStock})
+                } else {
+                    cartError.push(prod.prodId);
                 }
             }
-            //console.log('qty ', cart.products);
-            //updateProdQty(user.cartId, cart.products.prodId, cart.products.quantity)
-            const ticket = await ticketDao.create({
-                code: `${Math.random()}`,
-                purchase_datetime: new Date(),
-                amount: amountAcc,
-                purchaser: user.email
-            });
-            user.cartId = [];
-            return ticket;
+            if(amountAcc > 0) {
+                const ticket = await ticketDao.create({
+                    code: await this.#getMaxCode() + 1,
+                    purchase_datetime: new Date(),
+                    amount: amountAcc,
+                    purchaser: user.email
+                });
+                return [ticket, cartError];
+            }
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async #getMaxCode(){
+        let maxCode = 0;
+        const tickets = await this.getAll();
+        tickets.map((ticket) => { 
+          if (ticket.code > maxCode) maxCode = Number(ticket.code);                                       
+        });
+        return maxCode;
     }
 }
