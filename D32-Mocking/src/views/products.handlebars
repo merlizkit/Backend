@@ -2,14 +2,17 @@
     <h2>¡Bienvenido {{user.first_name}} ({{user.role}})!</h2>
     <h2>Listado de productos</h2>
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 g-4 prod-list">
+        <div class="row row-cols-auto row-cols-md-3 g-4 prod-list">
             {{#each docs}}
             <div class="col">
                 <div class="card mb-3">
                     <div class="card-body card-bg-color">
-                        <form action="api/carts/{{user.cartId}}/products/{{this._id}}" method="POST" >
-                            <h5 class="card-title">Codigo: <strong>{{this.code}}</strong></h5>
-                            <p class="card-text">Titulo: <strong>{{this.title}}</strong> - Descripción: <strong>{{this.description}}</strong></p>
+                        <form action="api/carts/{{../user.cartId}}/products/{{this._id}}" method="POST" >
+                            <h5 class="card-title">Titulo: <strong>{{this.title}}</strong></h5>
+                            <p class="card-text">Descripción: <strong>{{this.description}}</strong> - Codigo: {{this.code}}</p>
+                            {{#each this.thumbnails}}
+                            <img src={{this.thumbnails}} alt="product-image" />
+                            {{/each}}
                             <p class="card-text">Precio: <strong>{{this.price}}</strong></p>
                             <p class="card-text">Stock: <strong>{{this.stock}}</strong></p>
                             <p class="card-text">Categoría: <strong>{{this.category}}</strong></p>
@@ -18,7 +21,6 @@
                     </div>
                 </div>
             </div>
-        {{!-- agregar un fetch para traer el post --}}
             {{/each}}
         </div>
     </div>

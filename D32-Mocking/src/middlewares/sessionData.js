@@ -1,6 +1,6 @@
 export const sessionData = (req,res,next) => {
     if(!req.user) {
-        res.json({msg: "Session not found"});
+        res.redirect('/');
         next();
         }
     else {

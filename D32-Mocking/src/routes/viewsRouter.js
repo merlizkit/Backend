@@ -5,9 +5,12 @@ import { isAuth } from '../middlewares/isAuth.js';
 const router = Router();
 
 router
-    .get('/', (req,res) => { res.render('login')})
+    .get('/', (req,res) => { 
+        if(!req.user) res.render('login');
+        else res.redirect('/products');
+    })
     .get('/cart/:cid', sessionData, controller.getCart)
-    .get('/products', sessionData, controller.getProducts)
+    .get('/products', sessionData, controller.getAll)
     .get('/chat', isAuth, (req, res) => { res.render('chat') })
     .get('/login', controller.login)
     .get('/register', controller.register)

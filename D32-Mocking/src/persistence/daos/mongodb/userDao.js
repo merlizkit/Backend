@@ -38,7 +38,8 @@ export default class UserDao {
             const userExists = await this.getByEmail(email);
             if(userExists) {
                 const passValid = isValidPassword(password, userExists)
-                !passValid ? false : userExists;
+                if(!passValid) return false;
+                else return userExists;
             }
             else return false;
         } catch (error) {
@@ -49,8 +50,9 @@ export default class UserDao {
 
     async getByEmail(email){
         try {
-          const userExists = await UserModel.findOne({email});
-          return userExists
+            const userExists = await UserModel.findOne({email});
+            if(userExists) return userExists; 
+            else return false;
         } catch (error) {
             console.log(error)
         }

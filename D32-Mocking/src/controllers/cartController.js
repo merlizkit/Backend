@@ -38,7 +38,8 @@ export const updateCart = async (req, res, next) => {
         const { pid, cid} = req.params;
         const cartUpd = await service.updateCart(cid, pid);
         if(!cartUpd) res.status(404).json({msg: 'Not found'});
-            else res.status(200).json(cartUpd);
+            //else res.status(200).json(cartUpd);
+            else res.redirect(`/cart/${cid}`);
     }
     catch (error) {
         next(error.message);

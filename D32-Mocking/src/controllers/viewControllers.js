@@ -2,11 +2,9 @@ import * as prodService from '../services/productServices.js';
 import * as cartService from '../services/cartServices.js';
 import * as userService from "../services/userServices.js";
 
-export const getProducts = async (req, res, next) => {
+export const getAll = async (req, res, next) => {
     try {
-        // const { user: userId } = req.session?.passport || { user: null };
-        // const user = await userService.getById(userId);
-        const response = await prodService.getProducts(req.query);
+        const response = await prodService.getAll(req.query);
         res.render('products', response );
     }
     catch (error) {

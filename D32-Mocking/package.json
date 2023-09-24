@@ -1,5 +1,5 @@
 {
-  "name": "d06-login-passport",
+  "name": "d32-mock-error",
   "version": "1.0.0",
   "main": "./src/server.js",
   "type": "module",

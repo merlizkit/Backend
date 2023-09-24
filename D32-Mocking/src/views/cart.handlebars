@@ -2,19 +2,29 @@
     <h2>Carrito de compras</h2>
     {{#if _id}}
         {{#if products.length}}
-        <form action="/api/carts/{{user.cartId}}/purchase" method="PUT">
-                {{#each products}}
-                <ul class="container fs-4">Code: <strong>{{this.prodId.code}}</strong>
-                    <li class="fs-5">Titulo: <strong>{{this.prodId.title}}</strong> - Descripcion: <strong>{{this.prodId.description}}</strong></li>
-                    <li class="fs-5">Cantidad: <strong>{{this.quantity}}</strong></li>
-                </ul>
-                <br/>
-                {{/each}}
-            {{else}}
+            {{#each products}}
+                <div class="card mb-3">
+                    <div class="card-body card-bg-color">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title">Titulo: <strong>{{this.prodId.title}}</strong></h5>
+                                    <p class="card-text">Codigo: {{this.prodId.code}}</p>
+                                </div>
+                                <div class="col">
+                                    <p class="fs-5">Cantidad: <strong>{{this.quantity}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+            <form action="api/carts/{{user.cartId}}/purchase" method="PUT" >
+                <button type="submit" class="btn btn-light">Finalizar compra</button>
+            </form>
+        {{else}}
             <p>Nada en el carrito</p>
             <a href="../products">Listado de productos</a>
-            {{/if}}
-            <button type="submit" class="btn btn-light">Finalizar compra</button>
-        </form>
+        {{/if}}
     {{/if}}
 </div>
