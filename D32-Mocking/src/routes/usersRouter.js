@@ -11,10 +11,12 @@ router
         successRedirect:'/login'
     }), create)
 
-    .post('/login', passport.authenticate('login',{
-        failureRedirect:'/error-login',
-        successRedirect: '/products'
-    }), getByIdDTO)
+    .post('/login', passport.authenticate('login'
+    // ,{
+    //     failureRedirect:'/error-login',
+    //     successRedirect: '/products'
+    // }
+    ), getByIdDTO)
 
     .post('/logout', logout)
     .post('/private', isAuth, (req, res) => res.send('route private'))

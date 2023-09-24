@@ -35,10 +35,10 @@ export default class UserDao {
     async loginUser(user) {
         try {
             const { email, password } = user;
-            const userExist = await this.getByEmail(email);
-            if(userExist) {
-                const passValid = isValidPassword(password, userExist)
-                if(!passValid) return false; else return userExist;
+            const userExists = await this.getByEmail(email);
+            if(userExists) {
+                const passValid = isValidPassword(password, userExists)
+                !passValid ? false : userExists;
             }
             else return false;
         } catch (error) {
@@ -49,22 +49,21 @@ export default class UserDao {
 
     async getByEmail(email){
         try {
-          const userExist = await UserModel.findOne({email});
-          if(userExist) return userExist
-          else return false
+          const userExists = await UserModel.findOne({email});
+          return userExists
         } catch (error) {
             console.log(error)
         }
       }
 
     async getById(id){
-    try {
-        const userExist = await UserModel.findById(id)
-        if(userExist) return userExist
-        else return false
-    } catch (error) {
-        console.log(error)
-        throw new Error(error)
-    }
+        try {
+            const userExists = await UserModel.findById(id)
+            if(userExists) return userExists
+            else return false
+        } catch (error) {
+            console.log(error)
+            throw new Error(error)
+        }
     }
 }

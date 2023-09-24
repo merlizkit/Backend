@@ -4,55 +4,55 @@ const productDao = new ProductDaoMongoDB();
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
 //const productDao = new ProductDaoFS();
 
-export const getProducts = async (query) => {   
+export const getAll = async (query) => {   
     try {
         const response = await productDao.getProductsPag(query);
         return response;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 }
 
-export const getProductById = async (id) => {   
+export const getById = async (id) => {   
     try {
-        const item = await productDao.getProductById(id);
+        const item = await productDao.getById(id);
         if(!item) return false;
         else return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 }
 
-export const addProduct = async (obj) => {   
+export const create = async (obj) => {   
     try {
-        const newProd = await productDao.addProduct(obj);
+        const newProd = await productDao.create(obj);
         if(!newProd) return false;
         else return newProd;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 }
 
-export const updateProduct = async (id, obj) => {   
+export const update = async (id, obj) => {   
     try {
-        const item = await productDao.updateProduct(id,obj);
+        const item = await productDao.update(id,obj);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 }
 
-export const deleteProduct = async (id) => {   
+export const remove = async (id) => {   
     try {
-        const item = await productDao.deleteProduct(id);
+        const item = await productDao.remove(id);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 }
 
@@ -61,7 +61,7 @@ export const listTopN = async (listNumber) => {
         const products = await productDao.listTopN(listNumber);
         return products;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
     }
 }

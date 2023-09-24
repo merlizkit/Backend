@@ -1,4 +1,3 @@
-import UserReqDTO from "../dtos/userReqDTO.js";
 import UserResDTO from "../dtos/userResDto.js";
 import UserDao from "../daos/mongodb/userDao.js";
 const userDao = new UserDao();

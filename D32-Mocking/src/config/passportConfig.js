@@ -28,7 +28,6 @@ export const initializePassport = () => {
                 return done(null, userExists);
             }
             catch (error) {
-                console.log(error);
                 throw new Error(error);
             }
         }
