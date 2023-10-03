@@ -32,7 +32,7 @@ if(process.env.ENVIRONMENT === 'development') {
         new transports.File({ filename: __dirname + '/logs/errors.log', level: 'error' })
     ]
 };
-console.log(envTransports);
+
 const logConfig = {
     levels: customParams.levels,
     format: combine(
