@@ -20,8 +20,6 @@ router
     .get('/loggerTest', (req,res) => {
         res.locals.env = process.env.ENVIRONMENT;
         res.locals.logger = req.logger;
-        console.log(req.logger);
-        req.logger.info('probando')
         res.render('loggerTest')
     })
 
