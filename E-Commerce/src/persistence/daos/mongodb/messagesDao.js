@@ -6,7 +6,7 @@ export default class MessageDaoMongoDB {
             const response = await MessageModel.create(obj);
             return response;
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -15,7 +15,7 @@ export default class MessageDaoMongoDB {
             const response = await MessageModel.find();
             return response;
         } catch (error) {
-          console.log(error);  
+          req.logger.error(error.message);  
         }
     }
 
@@ -25,7 +25,7 @@ export default class MessageDaoMongoDB {
             return response;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -35,7 +35,7 @@ export default class MessageDaoMongoDB {
             return response;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -45,7 +45,7 @@ export default class MessageDaoMongoDB {
             return response;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -55,7 +55,7 @@ export default class MessageDaoMongoDB {
             return response;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 }

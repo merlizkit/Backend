@@ -27,8 +27,7 @@ export default class UserDao {
                 });
             } else return false;
         } catch (error) {
-            console.log(error);
-            throw new Error(error);
+            req.logger.error(error.message);
         }
     };
 
@@ -43,8 +42,7 @@ export default class UserDao {
             }
             else return false;
         } catch (error) {
-            console.log(error);
-            throw new Error(error);
+            req.logger.error(error.message);
         }
     };
 
@@ -54,7 +52,7 @@ export default class UserDao {
             if(userExists) return userExists; 
             else return false;
         } catch (error) {
-            console.log(error)
+            req.logger.error(error.message);
         }
       }
 
@@ -64,8 +62,7 @@ export default class UserDao {
             if(userExists) return userExists
             else return false
         } catch (error) {
-            console.log(error)
-            throw new Error(error)
+            req.logger.error(error.message);
         }
     }
 }

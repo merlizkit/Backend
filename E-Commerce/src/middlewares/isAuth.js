@@ -21,6 +21,6 @@ export const isAuth = async (req,res,next) => {
             else next ();
         }
     } catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }

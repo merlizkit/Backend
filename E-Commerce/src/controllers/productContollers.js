@@ -6,7 +6,7 @@ export const getAll = async (req, res, next) => {
             res.status(200).json(response);
         }
         catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -18,7 +18,7 @@ export const getById = async (req, res, next) => {
             else res.status(200).json(prod);
         }
         catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -29,7 +29,7 @@ export const create = async (req, res, next) => {
             else res.status(200).json(newProd);
         }
         catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -41,7 +41,7 @@ export const update = async (req, res, next) => {
                 else res.status(200).json(prodUpd);
         }
         catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -53,6 +53,6 @@ export const remove = async (req, res, next) => {
                 else res.status(200).json(prodDel);
         }
         catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }

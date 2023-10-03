@@ -9,8 +9,8 @@ export const getAllServices = async () => {
         const response = await messagesDao.getAll();
         return response;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -20,8 +20,8 @@ export const getByIdServices = async (id) => {
         if(!item) return false;
         else return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -31,8 +31,8 @@ export const createMsgServices = async (obj) => {
         if(!newProd) return false;
         else return newProd;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -41,8 +41,8 @@ export const updateMsgServices = async (id, obj) => {
         const item = await messagesDao.updateMsg(id,obj);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -51,8 +51,8 @@ export const deleteMsgServices = async (id) => {
         const item = await messagesDao.deleteMsg(id);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -61,7 +61,7 @@ export const deleteMsgsServices = async (id) => {
         const item = await messagesDao.deleteMsgs(id);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }

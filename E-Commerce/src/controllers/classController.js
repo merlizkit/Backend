@@ -10,7 +10,7 @@ export default class Controllers {
             const items = this.service.getAll();
             createResponse(res, 200, items);
         } catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -25,7 +25,7 @@ export default class Controllers {
                 });
             else createResponse(res, 200, item);
         } catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -39,7 +39,7 @@ export default class Controllers {
                 });
             else createResponse(res, 200, items);
         } catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     }
 
@@ -56,7 +56,7 @@ export default class Controllers {
                 const itemUpd = await this.service.update(id, req.body);
                 createResponse(res, 200, itemUpd);}
         } catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     };
 
@@ -73,7 +73,7 @@ export default class Controllers {
                 const itemDel = await this.service.delete(id);
                 createResponse(res, 200, itemDel);}
         } catch (error) {
-            next(error.message);
+        req.logger.error(error.message);
         }
     };
 };

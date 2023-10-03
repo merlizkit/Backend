@@ -12,6 +12,7 @@ import 'dotenv/config';
 import MainRouter from './routes/index.js';
 const mainRouter = new MainRouter();
 import MessagesDaoMongoDB from "./persistence/daos/mongodb/messagesDao.js";
+import { logger } from './utils/logger.js';
 const messagesDao = new MessagesDaoMongoDB();
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
 //import MessagesDaoFS from '../daos/filesystem/messagesDao.js';
@@ -26,6 +27,7 @@ app
     .use(express.static(__dirname + '/public'))
     .use(errorHandler)
     .use(morgan('dev'))
+    .use(logger)
 
     .engine('handlebars', handlebars.engine())
     .set('view engine', 'handlebars')
@@ -36,7 +38,7 @@ app
     .use(passport.initialize())
     .use(passport.session())
     
-    .use('/', mainRouter.getRouter())
+    .use('/', logger, mainRouter.getRouter())
     
 initializePassport();
 

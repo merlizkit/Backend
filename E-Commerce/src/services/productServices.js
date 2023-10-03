@@ -10,7 +10,7 @@ export const getAll = async (query) => {
         return response;
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 
@@ -21,7 +21,7 @@ export const getById = async (id) => {
         else return item;
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 
@@ -32,7 +32,7 @@ export const create = async (obj) => {
         else return newProd;
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 
@@ -42,7 +42,7 @@ export const update = async (id, obj) => {
         return item;
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 
@@ -52,7 +52,7 @@ export const remove = async (id) => {
         return item;
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 
@@ -62,6 +62,6 @@ export const listTopN = async (listNumber) => {
         return products;
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }

@@ -28,7 +28,7 @@ export const initializePassport = () => {
                 return done(null, userExists);
             }
             catch (error) {
-                throw new Error(error);
+                req.logger.error(error.message);
             }
         }
     ))
@@ -55,7 +55,7 @@ export const initializePassport = () => {
                 };
             }
             catch (error) {
-                console.log(error);
+                req.logger.error(error.message);
             }
         }
         ))

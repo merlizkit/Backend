@@ -28,7 +28,7 @@ export default class ProductDaoFS {
             }
             }
             catch (error){
-                console.log(error);
+                req.logger.error(error.message);
             }
         }
         
@@ -44,7 +44,7 @@ export default class ProductDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
         
@@ -61,7 +61,7 @@ export default class ProductDaoFS {
             }    
             }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     
@@ -77,7 +77,7 @@ export default class ProductDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         } 
     }
                 
@@ -93,7 +93,7 @@ export default class ProductDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     
@@ -129,7 +129,7 @@ export default class ProductDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     
@@ -152,7 +152,7 @@ export default class ProductDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -164,7 +164,7 @@ export default class ProductDaoFS {
             return slicedArray;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }   
 }

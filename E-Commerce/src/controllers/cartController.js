@@ -6,7 +6,7 @@ export const getAll = async (req, res, next) => {
         res.status(200).json(response);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -18,7 +18,7 @@ export const getById = async (req, res, next) => {
             else res.status(200).json(cart);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -29,7 +29,7 @@ export const create = async (req, res, next) => {
         else res.status(200).json(newCart);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -42,7 +42,7 @@ export const updateCart = async (req, res, next) => {
             else res.redirect(`/cart/${cid}`);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
     
@@ -55,7 +55,7 @@ export const updateProdQty = async (req,res,next) => {
             else res.status(200).json(cartUpd);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -67,7 +67,7 @@ export const replaceCart = async (req,res,next) => {
         return updCart;
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -79,7 +79,7 @@ export const removeCart = async (req, res, next) => {
             else res.status(200).json(cartDel);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -91,7 +91,7 @@ export const emptyCart = async (req, res, next) => {
             else res.status(200).json(cartDel);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -103,7 +103,7 @@ export const removeProd = async (req, res, next) => {
             else res.status(200).json(prodDel);
     }
     catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }
 
@@ -111,6 +111,6 @@ export const createTicket = async (req, res, next) => {
     try {
         
     } catch (error) {
-        next(error.message);
+        req.logger.error(error.message);
     }
 }

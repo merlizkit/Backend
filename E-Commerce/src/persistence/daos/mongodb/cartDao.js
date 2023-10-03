@@ -12,7 +12,7 @@ export default class CartDaoMongoDB {
             return response;
             }
             catch (error){
-                console.log(error);
+                req.logger.error(error.message);
             }
         }
         
@@ -23,7 +23,7 @@ export default class CartDaoMongoDB {
             return response;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
         

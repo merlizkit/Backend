@@ -8,7 +8,7 @@ export default class Services {
             const items = await this.dao.getAll();
             return items;
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     };
 
@@ -18,7 +18,7 @@ export default class Services {
             if(!item) return false;
             else return item;
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -28,7 +28,7 @@ export default class Services {
             if(!newItem) return false;
             else return newItem;
         } catch (error) {
-            console.log();
+            req.logger.error(error.message);
         }
     }
 
@@ -38,7 +38,7 @@ export default class Services {
             if(!item) return false;
             else return await this.dao.update(id, obj);
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -48,7 +48,7 @@ export default class Services {
             if(!item) return false
             else return await this.dao.delete(id);
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 }

@@ -1,6 +1,5 @@
 import * as prodService from '../services/productServices.js';
 import * as cartService from '../services/cartServices.js';
-import * as userService from "../services/userServices.js";
 
 export const getAll = async (req, res, next) => {
     try {
@@ -8,7 +7,7 @@ export const getAll = async (req, res, next) => {
         res.render('products', response );
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 
@@ -18,7 +17,7 @@ export const getCart = async (req, res, next) => {
         res.render('cart', response);
     }
     catch (error) {
-        console.log(error);
+        req.logger.error(error.message);
     }
 }
 

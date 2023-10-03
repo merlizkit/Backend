@@ -42,7 +42,7 @@ export default class TicketService extends Services {
                 return [ticket, cartError];
             }
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 

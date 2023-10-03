@@ -17,5 +17,12 @@ router
     .get('/error-login', controller.errorLogin)
     .get('/error-register', controller.errorRegister)
     .get('/profile', controller.profile)
+    .get('/loggerTest', (req,res) => {
+        res.locals.env = process.env.ENVIRONMENT;
+        res.locals.logger = req.logger;
+        console.log(req.logger);
+        req.logger.info('probando')
+        res.render('loggerTest')
+    })
 
 export default router;

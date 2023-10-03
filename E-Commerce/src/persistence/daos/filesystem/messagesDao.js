@@ -16,7 +16,7 @@ export default class MessageDaoFS {
             await fs.promises.writeFile(this.path, JSON.stringify(msgFile));
             return msg;
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -39,7 +39,7 @@ export default class MessageDaoFS {
                 return []
             }
         } catch (error) {
-          console.log(error);  
+          req.logger.error(error.message);  
         }
     }
 
@@ -63,7 +63,7 @@ export default class MessageDaoFS {
             } 
             await fs.promises.writeFile(this.path, JSON.stringify(msgsFile));
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 
@@ -73,7 +73,7 @@ export default class MessageDaoFS {
             const newArray = msgsFile.filter(m=>m.id!== id) 
             await fs.promises.writeFile(this.path, JSON.stringify(newArray))
         } else {
-            throw new Error(`Msg not found`)
+            req.logger.error(`Msg not found`);
         }
       }
 

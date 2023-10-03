@@ -14,7 +14,7 @@ export default class TicketController extends Controllers {
             if(!ticket) res.status(404).json({msg: 'Error generating ticket'});
             res.status(200).json(ticket);
         } catch (error) {
-            next(error.message);
+            req.logger.error(error.message);
         }
     }
 

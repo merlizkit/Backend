@@ -12,7 +12,7 @@ export default class UserRepository {
             const response = await this.dao.getById(id);
             return new UserResDTO(response);
         } catch (error) {
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 }

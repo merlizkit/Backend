@@ -9,8 +9,8 @@ export const getCarts = async () => {
         const response = await cartDao.getCarts();
         return response;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -20,8 +20,8 @@ export const getCartById = async (id) => {
         if(!item) return false;
         else return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -31,8 +31,8 @@ export const newCart = async (obj) => {
         if(!newCart) return false;
         else return newCart;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -41,8 +41,8 @@ export const updateCart = async (cartId, prodId) => {
         const cart = await cartDao.updateCart(cartId, prodId);
         return cart;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -51,8 +51,8 @@ export const updateProdQty = async (cartId, prodId, quantity) => {
         const cart = await cartDao.updateProdQty(cartId, prodId, quantity);
         return cart;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -61,8 +61,8 @@ export const replaceCart = async (cartId, products) => {
         const updCart = await cartDao.replaceCart(cartId, products);
         return updCart;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -71,8 +71,8 @@ export const removeCart = async (id) => {
         const item = await cartDao.removeCart(id);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -81,8 +81,8 @@ export const emptyCart = async (id) => {
         const item = await cartDao.emptyCart(id);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -91,7 +91,7 @@ export const removeProd = async (cartId, prodId) => {
         const item = await cartDao.removeProd(cartId, prodId);
         return item;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }

@@ -16,6 +16,7 @@ export default class ProductDaoMongoDB {
                 if (!item.title || !item.description || !item.code || item.price == 0 || item.stock < 0 || !item.category) {
                     // verifica que los valores no estén vacios, que el precio no sea 0 y el stock sea mayor o igual a 0.
                     //return `Error: some parameters missing ${item.code}`;
+                    req.logger.info('Product creation error: missing or wrong parameters');
                     CustomError.createError({
                         name: 'Product creation error',
                         cause: genProdErrorMissParam(item),
@@ -30,6 +31,7 @@ export default class ProductDaoMongoDB {
                         return response;
                     } else {
                         //return `Error: Code exists ${item.code}`;
+                        req.logger.info('Product creation error: product already exists');
                         CustomError.createError({
                             name: 'Product creation error',
                             cause: genProdErrorCodeExists(item),
@@ -42,7 +44,7 @@ export default class ProductDaoMongoDB {
             };
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
         
@@ -53,7 +55,7 @@ export default class ProductDaoMongoDB {
             return response;
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     
@@ -61,7 +63,7 @@ export default class ProductDaoMongoDB {
     async getProductsPag(query){
         try {
             const options = {
-                limit: query.limit || 10,
+                limit: query.limit || 9,
                 page: query.page || 1,
                 sort: query.sort || null,
                 lean: true
@@ -86,7 +88,7 @@ export default class ProductDaoMongoDB {
             return response;
             }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     /* ------------------------------------ verifica si el codigo existe ----------------------------------- */
@@ -102,7 +104,7 @@ export default class ProductDaoMongoDB {
             }    
             }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
         
@@ -113,6 +115,7 @@ export default class ProductDaoMongoDB {
             return response;
         }
         catch (error){
+            req.logger.error('Product error: product not found');
             CustomError.createError({
                 name: 'Product error',
                 cause: genCartErrorMissProduct(prodId),
@@ -131,12 +134,13 @@ export default class ProductDaoMongoDB {
             } else {
                 if(await this.checkCode(product.code)) {
                     //return `Error: Code exists ${item.code}`;
+                    req.logger.info('Product update error: product already exists');
                     CustomError.createError({
-                    name: 'Product update error',
-                    cause: genProdErrorCodeExists(product),
-                    message: 'An error occurred while updating the product',
-                    code: EErrors.PRODUCT_ALREADY_EXISTS
-                });
+                        name: 'Product update error',
+                        cause: genProdErrorCodeExists(product),
+                        message: 'An error occurred while updating the product',
+                        code: EErrors.PRODUCT_ALREADY_EXISTS
+                    });
                 } else {
                     if( product.title === '' ) {return 'Error: title cant be empty'}
                     if( product.description == '' ) {return 'Error: description cant be empty'}
@@ -151,6 +155,7 @@ export default class ProductDaoMongoDB {
             }
         }
         catch (error){
+            req.logger.error('Product update error: product not found');
             CustomError.createError({
                 name: 'Product update error',
                 cause: genCartErrorMissProduct(prodId),
@@ -174,6 +179,7 @@ export default class ProductDaoMongoDB {
             }
         }
         catch (error){
+            req.logger.error('Product delete error: product not found');
             CustomError.createError({
                 name: 'Product delete error',
                 cause: genCartErrorMissProduct(prod),

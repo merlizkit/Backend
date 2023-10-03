@@ -34,7 +34,7 @@ export default class CartDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
         
@@ -50,7 +50,7 @@ export default class CartDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         } 
     }
                 
@@ -66,7 +66,7 @@ export default class CartDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     
@@ -97,7 +97,7 @@ export default class CartDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
     
@@ -115,7 +115,7 @@ export default class CartDaoFS {
             }
         }
         catch (error){
-            console.log(error);
+            req.logger.error(error.message);
         }
     }
 }

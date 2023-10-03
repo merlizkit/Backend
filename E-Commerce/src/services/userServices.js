@@ -9,8 +9,8 @@ export const getByIdDTO = async (id) => {
         const response = await userRepository.getByIdDTO(id);
         return response;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        req.logger.error(error.message);
     }
 }
 
@@ -19,6 +19,6 @@ export const getById = async (req, res, next) => {
         const user = await userRepository.getById(req.session.passport.user);
         res.toObject(user);
     } catch (error) {
-      next(error.message);
+        req.logger.error(error.message);
     }
 };

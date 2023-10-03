@@ -14,9 +14,9 @@ export const getByIdDTO = async (req, res, next) => {
             if(req.path == '/current') {
                 next(error.message);
             } else {
-                console.log(error);
+                req.logger.error(error.message);
             }
-        } else console.log(error);
+        } else req.logger.error(error.message);
     }
 };
 
