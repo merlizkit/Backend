@@ -20,6 +20,12 @@ router
     .get('/loggerTest', (req,res) => {
         res.locals.env = process.env.ENVIRONMENT;
         res.locals.logger = req.logger;
+        req.logger.debug("Prueba logger debug")
+        req.logger.http("Prueba logger http")
+        req.logger.info("Prueba logger info")
+        req.logger.warning("Prueba logger warning")
+        req.logger.error("Prueba logger error")
+        req.logger.fatal("Prueba logger fatal")
         res.render('loggerTest')
     })
 

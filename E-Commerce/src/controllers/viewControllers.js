@@ -4,6 +4,7 @@ import * as cartService from '../services/cartServices.js';
 export const getAll = async (req, res, next) => {
     try {
         const response = await prodService.getAll(req.query);
+        req.logger.fatal('prueba guardado error en archivo')
         res.render('products', response );
     }
     catch (error) {
@@ -30,3 +31,5 @@ export const errorLogin = (req, res) => { res.render('errorLogin') };
 export const profile = (req, res) => { 
     res.render('profile')
 };
+
+
