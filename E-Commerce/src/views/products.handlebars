@@ -11,7 +11,7 @@
                             <h5 class="card-title">Titulo: <strong>{{this.title}}</strong></h5>
                             <p class="card-text">Descripción: <strong>{{this.description}}</strong> - Codigo: {{this.code}}</p>
                             {{#each this.thumbnails}}
-                            <img src={{this.thumbnails}} alt="product-image" />
+                            <img class="card-image" alt="product-image" src={{this}} />
                             {{/each}}
                             <p class="card-text">Precio: <strong>{{this.price}}</strong></p>
                             <p class="card-text">Stock: <strong>{{this.stock}}</strong></p>
