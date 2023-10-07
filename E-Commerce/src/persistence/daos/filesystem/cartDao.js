@@ -18,7 +18,7 @@ export default class CartDaoFS {
                 return newCart;
             }
             catch (error){
-                console.log(error);
+                req.logger.error(error.message);
             }
         }
         

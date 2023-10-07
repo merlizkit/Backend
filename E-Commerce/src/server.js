@@ -12,7 +12,7 @@ import 'dotenv/config';
 import MainRouter from './routes/index.js';
 const mainRouter = new MainRouter();
 import MessagesDaoMongoDB from "./persistence/daos/mongodb/messagesDao.js";
-import { logger } from './utils/logger.js';
+import { logger, logger2 } from './utils/logger.js';
 const messagesDao = new MessagesDaoMongoDB();
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
 //import MessagesDaoFS from '../daos/filesystem/messagesDao.js';
@@ -44,21 +44,21 @@ initializePassport();
 
 const PORT = process.env.PORT || 8080;
 const httpServer = app.listen(PORT, ()=>{
-    console.log(`Server listening on port ${PORT}`);
+    logger2.info(`Server listening on port ${PORT}`);
 });
 
 const socketServer = new Server(httpServer);
 
 socketServer.on('connection', async (socket) => {
-    console.log(`User connected ${socket.id}`);
+    logger2.info(`User connected ${socket.id}`);
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
+        logger2.info('User disconnected');
     });
 
     /* ---------------------------------- chat ---------------------------------- */
     socket.on('newUser', (user)=>{
-        console.log(`>${user} inició sesión`);
+        logger2.info(`>${user} inició sesión`);
     })
 
     socket.on('chat:message', async(msg) =>{

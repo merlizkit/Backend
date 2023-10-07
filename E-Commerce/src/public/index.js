@@ -41,7 +41,7 @@ if(location.pathname == '/chat'){
     })
 
     socketClient.on('msg', (msg)=>{
-        console.log(msg);
+        req.logger.info(msg);
     })
 
     socketClient.on('newUser', (user) => {

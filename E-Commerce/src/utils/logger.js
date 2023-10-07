@@ -63,9 +63,15 @@ const logConfig = {
     env: process.env.ENVIRONMENT
 };
 
+/* ------------------------------- middleware ------------------------------- */
 export const logger = (req,res,next) => {   
-    req.logger = createLogger(logConfig);    
-    next();
+    if(req) {
+        req.logger = createLogger(logConfig);    
+        next();
+    } else {
+        logger = createLogger(logConfig);
+    }
 };
 
-// logger.transports.file.level = 'info';  --> le cambio el nivel de error a la configuración
+/* ------------------------------- server logs ------------------------------ */
+export const logger2 = createLogger(logConfig);

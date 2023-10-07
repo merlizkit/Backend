@@ -11,7 +11,6 @@ export default class UserDao {
             const existUser = await this.getByEmail(email);
             if(!existUser) {
                 const cart = await cartDao.newCart();
-                console.log(cart.id);
                 if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
                     return await UserModel.create({
                         ...user,
