@@ -52,3 +52,5 @@ fatal | 20231007 19:14:44 | prueba guardado error en archivo
 fatal | 20231007 19:52:12 | prueba guardado error en archivo
 fatal | 20231007 19:53:44 | prueba guardado error en archivo
 fatal | 20231007 19:55:11 | prueba guardado error en archivo
+error | 20231008 08:33:55 | Prueba logger error
+fatal | 20231008 08:33:55 | Prueba logger fatal

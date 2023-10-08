@@ -46,7 +46,7 @@ if(process.env.ENVIRONMENT === 'development') {
                     printf((info) => `${info.level} | ${info.timestamp} | ${info.message}`)
             ), }),
         new transports.File({ 
-            filename: __dirname + '/logs/errors.log', 
+            filename: process.cwd() + '/src/logs/errors.log', 
             level: 'error',
             format: combine(
                 timestamp({
