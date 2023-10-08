@@ -64,13 +64,9 @@ const logConfig = {
 };
 
 /* ------------------------------- middleware ------------------------------- */
-export const logger = (req,res,next) => {   
-    if(req) {
+export const logger = (req,res,next) => {
         req.logger = createLogger(logConfig);    
         next();
-    } else {
-        logger = createLogger(logConfig);
-    }
 };
 
 /* ------------------------------- server logs ------------------------------ */
