@@ -1,0 +1,98 @@
+error | 20231003 11:25:51 | Prueba logger error
+fatal | 20231003 11:25:51 | Prueba logger fatal
+error | 20231003 11:25:58 | Prueba logger error
+fatal | 20231003 11:25:58 | Prueba logger fatal
+fatal | 20231007 18:46:46 | prueba guardado error en archivo
+fatal | 20231007 18:51:32 | prueba guardado error en archivo
+fatal | 20231007 18:54:58 | prueba guardado error en archivo
+fatal | 20231007 18:55:41 | prueba guardado error en archivo
+fatal | 20231007 18:56:58 | prueba guardado error en archivo
+fatal | 20231007 18:57:03 | prueba guardado error en archivo
+fatal | 20231007 18:57:53 | prueba guardado error en archivo
+fatal | 20231007 18:58:08 | prueba guardado error en archivo
+fatal | 20231007 18:58:34 | prueba guardado error en archivo
+fatal | 20231007 18:58:35 | prueba guardado error en archivo
+fatal | 20231007 18:59:42 | prueba guardado error en archivo
+fatal | 20231007 19:00:04 | prueba guardado error en archivo
+fatal | 20231007 19:00:04 | prueba guardado error en archivo
+fatal | 20231007 19:01:19 | prueba guardado error en archivo
+fatal | 20231007 19:01:19 | prueba guardado error en archivo
+fatal | 20231007 19:01:54 | prueba guardado error en archivo
+fatal | 20231007 19:01:55 | prueba guardado error en archivo
+fatal | 20231007 19:02:20 | prueba guardado error en archivo
+fatal | 20231007 19:02:21 | prueba guardado error en archivo
+fatal | 20231007 19:02:38 | prueba guardado error en archivo
+fatal | 20231007 19:02:39 | prueba guardado error en archivo
+fatal | 20231007 19:02:58 | prueba guardado error en archivo
+fatal | 20231007 19:02:59 | prueba guardado error en archivo
+fatal | 20231007 19:03:20 | prueba guardado error en archivo
+fatal | 20231007 19:03:21 | prueba guardado error en archivo
+fatal | 20231007 19:03:55 | prueba guardado error en archivo
+fatal | 20231007 19:04:18 | prueba guardado error en archivo
+fatal | 20231007 19:04:18 | prueba guardado error en archivo
+fatal | 20231007 19:05:12 | prueba guardado error en archivo
+fatal | 20231007 19:05:13 | prueba guardado error en archivo
+fatal | 20231007 19:06:19 | prueba guardado error en archivo
+fatal | 20231007 19:07:31 | prueba guardado error en archivo
+fatal | 20231007 19:07:35 | prueba guardado error en archivo
+fatal | 20231007 19:09:25 | prueba guardado error en archivo
+fatal | 20231007 19:09:36 | prueba guardado error en archivo
+fatal | 20231007 19:11:21 | prueba guardado error en archivo
+fatal | 20231007 19:12:09 | prueba guardado error en archivo
+fatal | 20231007 19:12:38 | prueba guardado error en archivo
+fatal | 20231007 19:13:40 | prueba guardado error en archivo
+fatal | 20231007 19:13:45 | prueba guardado error en archivo
+fatal | 20231007 19:13:48 | prueba guardado error en archivo
+fatal | 20231007 19:13:50 | prueba guardado error en archivo
+fatal | 20231007 19:13:53 | prueba guardado error en archivo
+fatal | 20231007 19:13:56 | prueba guardado error en archivo
+fatal | 20231007 19:13:58 | prueba guardado error en archivo
+fatal | 20231007 19:14:03 | prueba guardado error en archivo
+fatal | 20231007 19:14:44 | prueba guardado error en archivo
+fatal | 20231007 19:52:12 | prueba guardado error en archivo
+fatal | 20231007 19:53:44 | prueba guardado error en archivo
+fatal | 20231007 19:55:11 | prueba guardado error en archivo
+error | 20231008 08:33:55 | Prueba logger error
+fatal | 20231008 08:33:55 | Prueba logger fatal
+error | 20231008 08:49:18 | Prueba logger error
+fatal | 20231008 08:49:18 | Prueba logger fatal
+error | 20231011 22:40:22 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 22:49:29 | req is not defined
+error | 20231011 22:50:39 | req is not defined
+error | 20231011 22:50:54 | req is not defined
+error | 20231011 22:51:57 | undefined
+error | 20231011 22:52:07 | req is not defined
+error | 20231011 22:57:42 | owner is not defined
+error | 20231011 22:58:07 | owner is not defined
+error | 20231011 22:58:33 | owner is not defined
+error | 20231011 22:59:01 | owner is not defined
+error | 20231011 23:00:33 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 23:01:03 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 23:01:58 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 23:03:35 | productController
+error | 20231011 23:04:19 | productController
+error | 20231011 23:05:15 | productController
+error | 20231011 23:06:02 | productController
+error | 20231011 23:09:42 | productController
+error | 20231011 23:14:34 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 23:14:49 | productController
+error | 20231011 23:15:41 | productController
+error | 20231011 23:16:04 | productController
+error | 20231011 23:16:48 | productController
+error | 20231011 23:25:45 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 23:25:58 | productController
+error | 20231011 23:30:41 | productController
+error | 20231011 23:31:30 | productController
+error | 20231011 23:43:17 | productController
+error | 20231011 23:44:02 | productController
+error | 20231011 23:44:19 | productController
+error | 20231011 23:44:44 | productController
+error | 20231011 23:46:03 | productController
+error | 20231011 23:47:05 | Cannot destructure property 'id' of 'req.user' as it is undefined.
+error | 20231011 23:47:44 | productController
+error | 20231011 23:48:26 | productController
+error | 20231011 23:49:05 | productController
+error | 20231011 23:50:25 | productController
+error | 20231011 23:50:48 | productController
+error | 20231011 23:51:43 | productController
+error | 20231011 23:52:48 | productController

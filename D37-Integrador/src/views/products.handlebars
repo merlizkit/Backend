@@ -1,0 +1,53 @@
+<div class="container">
+    <h2>¡Bienvenido {{user.first_name}} ({{user.role}})!</h2>
+    <h2>Listado de productos</h2>
+    <div class="container">
+        <div class="row row-cols-auto row-cols-md-3 g-4 prod-list">
+            {{#each docs}}
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body card-bg-color">
+                        <form action="api/carts/{{../user.cartId}}/products/{{this._id}}" method="POST" >
+                            <h5 class="card-title">Titulo: <strong>{{this.title}}</strong></h5>
+                            <p class="card-text">Descripción: <strong>{{this.description}}</strong> - Codigo: {{this.code}}</p>
+                            {{#each this.thumbnails}}
+                            <img class="card-image" alt="product-image" src={{this}} />
+                            {{/each}}
+                            <p class="card-text">Precio: <strong>{{this.price}}</strong></p>
+                            <p class="card-text">Stock: <strong>{{this.stock}}</strong></p>
+                            <p class="card-text">Categoría: <strong>{{this.category}}</strong></p>
+                            <button type="submit" class="btn btn-light">Agregar al carrito</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <br/>
+    <div class="container w-50 d-flex align-items-center justify-content-center">
+        <nav class="paginate" aria-label="Page navigation example">
+            <ul class="pagination">
+                {{#if hasPrevPage}}
+                    <li class="page-item">
+                {{else}}
+                    <li class="page-item disabled">
+                {{/if}}
+                    <a class="page-link" href={{this.prevLink}} aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">{{this.page}}</a></li>
+                {{#if hasNextPage}}
+                <li class="page-item">
+                {{else}}
+                <li class="page-item disabled">
+                {{/if}}
+                    <a class="page-link" href={{this.nextLink}} aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
