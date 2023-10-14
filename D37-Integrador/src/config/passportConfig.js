@@ -2,8 +2,8 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import UserDao from "../persistence/daos/mongodb/userDao.js";
-import 'dotenv/config';
-
+import config from './config.js';
+import { sendMail } from '../services/mailingServices.js';
 
 const userDao = new UserDao();
 
@@ -12,6 +12,7 @@ export const initializePassport = () => {
         {passReqToCallback: true, usernameField: 'email', passwordField: 'password'}, async (req,username,password,done) => {
             try {
                 const result = await userDao.registerUser(req.body);
+                await sendMail(req.body, 'register');
                 return done(null,result);
             }
             catch (error) {
@@ -32,10 +33,10 @@ export const initializePassport = () => {
             }
         }
     ))
-
+    
     passport.use('github', new GitHubStrategy({
-        clientID: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
+        clientID: config.CLIENT_ID,
+        clientSecret: config.CLIENT_SECRET,
         callbackURL: 'http://localhost:8080/users/githubcallback'
         }, async (accessToken, refreshToken, profile, done) => {
             try {

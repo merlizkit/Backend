@@ -8,11 +8,11 @@ import passport from 'passport';
 import { initializePassport } from './config/passportConfig.js';
 import { Server } from 'socket.io';
 import handlebars from 'express-handlebars';
-import 'dotenv/config';
 import MainRouter from './routes/index.js';
 const mainRouter = new MainRouter();
 import MessagesDaoMongoDB from "./persistence/daos/mongodb/messagesDao.js";
 import { logger, logger2 } from './utils/logger.js';
+import config from './config/config.js';
 const messagesDao = new MessagesDaoMongoDB();
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
 //import MessagesDaoFS from '../daos/filesystem/messagesDao.js';
@@ -33,7 +33,7 @@ app
     .set('view engine', 'handlebars')
     .set('views', __dirname + '/views')
 
-    .use(cookieParser())
+    .use(cookieParser(config.SECRET_COOKIES))
     .use(session(mongoStoreOptions))
     .use(passport.initialize())
     .use(passport.session())
@@ -42,7 +42,7 @@ app
     
 initializePassport();
 
-const PORT = process.env.PORT || 8080;
+const PORT = config.PORT || 8080;
 const httpServer = app.listen(PORT, ()=>{
     logger2.info(`Server listening on port ${PORT}`);
 });

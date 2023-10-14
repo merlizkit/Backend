@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { getByIdDTO, logout } from "../controllers/userControllers.js";
+import { getByIdDTO, logout, resetPass, updatePass } from "../controllers/userControllers.js";
 import passport from 'passport';
 import { isAuth } from '../middlewares/isAuth.js';
 import { create } from "../controllers/cartController.js";
+import { checkToken } from "../middlewares/checkToken.js";
 const router = Router();
 
 router
@@ -18,6 +19,9 @@ router
 
     .post('/logout', logout)
     .post('/private', isAuth, (req, res) => res.send('route private'))
+    
+    .post('/reset-pass', resetPass) //revisar, como use passport no tengo eso. En el ejemplo era con jwt
+    .put('/new-pass', updatePass) //revisar, como use passport no tengo eso. En el ejemplo era con jwt
 
     .get('/github', passport.authenticate('github',{scope:['user:email']}))
     

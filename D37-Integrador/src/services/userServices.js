@@ -1,5 +1,8 @@
+import UserDao from "../persistence/daos/mongodb/userDao.js";
 import UserRepository from "../persistence/repository/userRepository.js";
+import { sendMail } from "./mailingServices.js";
 const userRepository = new UserRepository();
+const userDao = new UserDao();
 
 //import UserDaoFS from '../daos/filesystem/userDao.js';
 //const userDao = new UserDaoFS();
@@ -20,5 +23,23 @@ export const getById = async (req, res, next) => {
         res.toObject(user);
     } catch (error) {
         req.logger.error(error.message);
+    }
+};
+
+export const resetPass = async (email) => {
+    try {
+        const { userExists: user, token } = await userDao.resetPass(email);
+        if(!token) return false;
+        return sendMail(user, 'resetPass', token);
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+export const updatePass = async (user, password) => {
+    try {
+        return await userDao.updatePass(user, password);
+    } catch (error) {
+        throw new Error(error.message);
     }
 };
