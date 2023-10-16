@@ -1,5 +1,6 @@
 import { getByIdDTO } from "../services/userServices.js";
 
+
 export const isAuth = async (req,res,next) => {
     try {
         const { id: userId } = req.user;
