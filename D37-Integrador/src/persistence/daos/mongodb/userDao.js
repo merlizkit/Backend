@@ -33,7 +33,7 @@ export default class UserDao extends MongoDao {
                 });
             } else return false;
         } catch (error) {
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
     };
 
@@ -48,7 +48,7 @@ export default class UserDao extends MongoDao {
             }
             else return false;
         } catch (error) {
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
     };
 
@@ -58,7 +58,7 @@ export default class UserDao extends MongoDao {
             if(userExists) return userExists; 
             else return false;
         } catch (error) {
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
       }
 
@@ -68,7 +68,7 @@ export default class UserDao extends MongoDao {
             if(userExists) return userExists
             else return false
         } catch (error) {
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
     }
 
@@ -97,7 +97,7 @@ export default class UserDao extends MongoDao {
                 return {userExists, token};
             }
         } catch (error) {
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
     };
 
@@ -108,7 +108,7 @@ export default class UserDao extends MongoDao {
             const newPass = createHash(password);
             return await this.update(user._id, { password: newPass })
         } catch (error) {
-            throw new Error(error.message);
+            throw new Error(error.stack);
         }
     }
 }

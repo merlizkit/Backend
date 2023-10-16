@@ -20,6 +20,10 @@ export const isAuth = async (req,res,next) => {
                     else res.status(401).send({ msg: 'Unauthorized' })
                 }
             }
+            if(req.baseUrl === '/users') {
+                if(req.isAuthenticated() && user.role == 'admin') return next();
+                else res.status(401).send({ msg: 'Unauthorized' })
+            }
             if(req.baseUrl === '/api/carts') {
                 if(req.isAuthenticated() && user.role != 'admin') return next();
                 else res.status(401).send({ msg: 'Unauthorized' })

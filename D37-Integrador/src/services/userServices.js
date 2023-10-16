@@ -13,7 +13,7 @@ export const getByIdDTO = async (id) => {
         return response;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -22,7 +22,7 @@ export const getById = async (req, res, next) => {
         const user = await userRepository.getById(req.session.passport.user);
         res.toObject(user);
     } catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 };
 
@@ -32,7 +32,7 @@ export const resetPass = async (email) => {
         if(!token) return false;
         return sendMail(user, 'resetPass', token);
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(error.stack);
     }
 };
 
@@ -40,6 +40,14 @@ export const updatePass = async (user, password) => {
     try {
         return await userDao.updatePass(user, password);
     } catch (error) {
-        throw new Error(error.message);
+        throw new Error(error.stack);
     }
 };
+
+export const updateRole = async (uid, role) => {
+    try {
+        return await userDao.update(uid, {role: role});
+    } catch (error) {
+        throw new Error(error.stack);
+    }
+}
