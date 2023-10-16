@@ -10,7 +10,7 @@ export const getCarts = async () => {
         return response;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -21,7 +21,7 @@ export const getCartById = async (id) => {
         else return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -32,7 +32,7 @@ export const newCart = async (obj) => {
         else return newCart;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -42,7 +42,7 @@ export const updateCart = async (cartId, prodId) => {
         return cart;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -52,7 +52,7 @@ export const updateProdQty = async (cartId, prodId, quantity) => {
         return cart;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -62,7 +62,7 @@ export const replaceCart = async (cartId, products) => {
         return updCart;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -72,7 +72,7 @@ export const removeCart = async (id) => {
         return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -82,7 +82,7 @@ export const emptyCart = async (id) => {
         return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -92,6 +92,6 @@ export const removeProd = async (cartId, prodId) => {
         return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
