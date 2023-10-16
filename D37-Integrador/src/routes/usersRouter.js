@@ -20,8 +20,8 @@ router
     .post('/logout', logout)
     .post('/private', isAuth, (req, res) => res.send('route private'))
     
-    .post('/reset-pass', resetPass) //revisar, como use passport no tengo eso. En el ejemplo era con jwt
-    .put('/new-pass', updatePass) //revisar, como use passport no tengo eso. En el ejemplo era con jwt
+    .post('/reset-pass', resetPass)
+    .put('/new-pass', updatePass)
 
     .get('/github', passport.authenticate('github',{scope:['user:email']}))
     
