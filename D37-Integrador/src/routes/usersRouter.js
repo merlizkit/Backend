@@ -3,7 +3,6 @@ import { getByIdDTO, logout, resetPass, updatePass } from "../controllers/userCo
 import passport from 'passport';
 import { isAuth } from '../middlewares/isAuth.js';
 import { create } from "../controllers/cartController.js";
-import { checkToken } from "../middlewares/checkToken.js";
 const router = Router();
 
 router
