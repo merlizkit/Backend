@@ -41,8 +41,7 @@ export default class ProductDaoMongoDB {
             };
         }
         catch (error){
-        // req.logger.error('productServices', error.stack);
-        console.log(error);
+            throw new Error(error.stack);
         }
     }
         
@@ -53,7 +52,7 @@ export default class ProductDaoMongoDB {
             return response;
         }
         catch (error){
-            req.logger.error(error.message);
+        throw new Error(error.stack);
         }
     }
     
@@ -86,7 +85,7 @@ export default class ProductDaoMongoDB {
             return response;
             }
         catch (error){
-            req.logger.error(error.message);
+        throw new Error(error.stack);
         }
     }
     /* ------------------------------------ verifica si el codigo existe ----------------------------------- */
@@ -102,7 +101,7 @@ export default class ProductDaoMongoDB {
             }    
             }
         catch (error){
-            req.logger.error(error.message);
+        throw new Error(error.stack);
         }
     }
         
