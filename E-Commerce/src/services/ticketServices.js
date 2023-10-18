@@ -42,7 +42,7 @@ export default class TicketService extends Services {
                 return [ticket, cartError];
             }
         } catch (error) {
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
     }
 

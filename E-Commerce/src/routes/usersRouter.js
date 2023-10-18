@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getByIdDTO, logout } from "../controllers/userControllers.js";
+import { getByIdDTO, logout, resetPass, updatePass, updateRole } from "../controllers/userControllers.js";
 import passport from 'passport';
 import { isAuth } from '../middlewares/isAuth.js';
 import { create } from "../controllers/cartController.js";
@@ -18,6 +18,11 @@ router
 
     .post('/logout', logout)
     .post('/private', isAuth, (req, res) => res.send('route private'))
+    
+    .post('/reset-pass', resetPass)
+    .put('/new-pass', updatePass)
+
+    .put('/premium/:uid', updateRole)
 
     .get('/github', passport.authenticate('github',{scope:['user:email']}))
     

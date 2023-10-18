@@ -4,17 +4,18 @@ import { hashSync, compareSync, genSaltSync } from 'bcrypt';
 import MongoStore from 'connect-mongo';
 import { connectionString } from './persistence/daos/mongodb/connection.js';
 import { fakerES_MX as faker } from '@faker-js/faker';
+import config from './config/config.js';
 export const __dirname = dirname(fileURLToPath(import.meta.url));
 
-/* ----------------------------- connection data ---------------------------- */
+/* ----------------------------- connection data ---------------------------- */;
 export const mongoStoreOptions = {
     store: MongoStore.create({
         mongoUrl: connectionString,
         crypto: {
-            secret: process.env.SECRET_MONGO
+            secret: config.SECRET_MONGO
         }
     }),
-    secret: process.env.SECRET_MONGO,
+    secret: config.SECRET_MONGO,
     resave: false,
     saveUninitialized: false,
     cookie: {

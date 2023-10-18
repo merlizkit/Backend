@@ -10,11 +10,5 @@ router
         }
         res.send({status: "success", payload: products});
     })
-    // .post('/mockingproductsmongo', async (req,res) => {
-    //     let products = [];
-    //     for(let i=0; i<100; i++){
-    //         products.push(generateProduct())
-    //     }
-    // }, addProduct(products))
 
 export default router

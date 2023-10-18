@@ -10,41 +10,38 @@ import { ProductModel } from "./models/productModel.js";
 //     }
 export default class ProductDaoMongoDB {
     /* -------------------------- crear nuevo producto -------------------------- */
-    async create(product){
+    async create(item){
         try {
-            for (const item of product) {
-                if (!item.title || !item.description || !item.code || item.price == 0 || item.stock < 0 || !item.category) {
-                    // verifica que los valores no estén vacios, que el precio no sea 0 y el stock sea mayor o igual a 0.
-                    //return `Error: some parameters missing ${item.code}`;
-                    req.logger.info('Product creation error: missing or wrong parameters');
+            if (!item.title || !item.description || !item.code || item.price == 0 || item.stock < 0 || !item.category) {
+                // verifica que los valores no estén vacios, que el precio no sea 0 y el stock sea mayor o igual a 0.
+                //req.logger.info('Product creation error: missing or wrong parameters');
+                CustomError.createError({
+                    name: 'Product creation error',
+                    cause: genProdErrorMissParam(item),
+                    message: 'An error occurred while creating the new product',
+                    model: 'products',
+                    code: EErrors.INVALID_PRD_TYPES_ERROR
+                });
+            } else {
+                const exists = await this.checkCode(item.code) // verifica que el código no exita.
+                if (exists === false) {
+                    const response = await ProductModel.create(item);
+                    return response;
+                } else {
+                    //return `Error: Code exists ${item.code}`;
+                    //req.logger.info('Product creation error: product already exists');
                     CustomError.createError({
                         name: 'Product creation error',
-                        cause: genProdErrorMissParam(item),
+                        cause: genProdErrorCodeExists(item),
                         message: 'An error occurred while creating the new product',
                         model: 'products',
-                        code: EErrors.INVALID_PRD_TYPES_ERROR
+                        code: EErrors.PRODUCT_ALREADY_EXISTS
                     });
-                } else {
-                    const exists = await this.checkCode(item.code) // verifica que el código no exita.
-                    if (exists === false) {
-                        const response = await ProductModel.create(item);
-                        return response;
-                    } else {
-                        //return `Error: Code exists ${item.code}`;
-                        req.logger.info('Product creation error: product already exists');
-                        CustomError.createError({
-                            name: 'Product creation error',
-                            cause: genProdErrorCodeExists(item),
-                            message: 'An error occurred while creating the new product',
-                            model: 'products',
-                            code: EErrors.PRODUCT_ALREADY_EXISTS
-                        });
-                    }
                 }
             };
         }
         catch (error){
-            req.logger.error(error.message);
+            throw new Error(error.stack);
         }
     }
         
@@ -55,7 +52,7 @@ export default class ProductDaoMongoDB {
             return response;
         }
         catch (error){
-            req.logger.error(error.message);
+        throw new Error(error.stack);
         }
     }
     
@@ -88,7 +85,7 @@ export default class ProductDaoMongoDB {
             return response;
             }
         catch (error){
-            req.logger.error(error.message);
+        throw new Error(error.stack);
         }
     }
     /* ------------------------------------ verifica si el codigo existe ----------------------------------- */
@@ -104,7 +101,7 @@ export default class ProductDaoMongoDB {
             }    
             }
         catch (error){
-            req.logger.error(error.message);
+        throw new Error(error.stack);
         }
     }
         

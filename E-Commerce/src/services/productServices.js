@@ -1,6 +1,7 @@
 import ProductDaoMongoDB from "../persistence/daos/mongodb/productDao.js";
 const productDao = new ProductDaoMongoDB();
 
+
 //import ProductDaoFS from '../daos/filesystem/productDao.js';
 //const productDao = new ProductDaoFS();
 
@@ -10,7 +11,7 @@ export const getAll = async (query) => {
         return response;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -21,7 +22,7 @@ export const getById = async (id) => {
         else return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -32,7 +33,7 @@ export const create = async (obj) => {
         else return newProd;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -42,7 +43,7 @@ export const update = async (id, obj) => {
         return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -52,7 +53,7 @@ export const remove = async (id) => {
         return item;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }
 
@@ -62,6 +63,6 @@ export const listTopN = async (listNumber) => {
         return products;
     }
     catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }

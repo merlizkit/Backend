@@ -1,0 +1,104 @@
+definitions:
+# --------------------------------- productos -------------------------------- #
+  Product:
+    type: object
+    properties:
+      title:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+      code:
+        type: string
+        required: true
+        unique: true
+      price:
+        type: number
+        required: true
+      stock:
+        type: number
+        required: true
+      category:
+        type: string
+        required: true
+        enum:
+          - pterm
+          - selab
+          - mprim
+          - insum
+      status:
+        type: boolean
+        default: true
+        required: true
+      thumbnails:
+        type: array
+        default: []
+        items:
+          type: string
+      owner:
+        type: string
+        default: admin
+
+# ---------------------------------- carros ---------------------------------- #
+  CartProduct:
+    type: object
+    properties:
+      prodId:
+        type: string
+        required: true
+      quantity:
+        type: number
+        required: true
+
+  Cart:
+    type: object
+    properties:
+      products:
+        type: array
+        items:
+          $ref: "#/definitions/CartProduct"
+
+# ---------------------------------- tickets --------------------------------- #
+  Ticket:
+    type: object
+    properties:
+      code:
+        type: string
+        required: true
+      purchase_datetime:
+        type: string
+        format: date-time
+        required: true
+      amount:
+        type: number
+        required: true
+      purchaser:
+        type: string
+        required: true
+
+# --------------------------------- usuarios --------------------------------- #
+  User:
+    type: object
+    properties:
+      first_name:
+        type: string
+        required: true
+      last_name:
+        type: string
+        required: true
+      email:
+        type: string
+        required: true
+      age:
+        type: integer
+        required: true
+      password:
+        type: string
+        required: true
+      cartId:
+        type: string
+        required: false
+      role:
+        type: string
+        default: "user"

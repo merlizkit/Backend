@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as controller from '../controllers/viewControllers.js';
 import { sessionData } from '../middlewares/sessionData.js';
 import { isAuth } from '../middlewares/isAuth.js';
+import config from '../config/config.js';
 const router = Router();
 
 router
@@ -18,7 +19,7 @@ router
     .get('/error-register', controller.errorRegister)
     .get('/profile', controller.profile)
     .get('/loggerTest', (req,res) => {
-        res.locals.env = process.env.ENVIRONMENT;
+        res.locals.env = config.ENVIRONMENT;
         res.locals.logger = req.logger;
         req.logger.debug("Prueba logger debug")
         req.logger.http("Prueba logger http")

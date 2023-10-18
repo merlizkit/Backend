@@ -1,0 +1,430 @@
+# --------------------------------- productos -------------------------------- #
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: API de <link>Productos</link>
+  description: API para gestionar <link>productos</link>
+paths:
+  /<link>productos</link>:
+    get:
+      summary: Obtener todos los <link>productos</link>
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: <link>Producto</link> no encontrado
+    post:
+      summary: Crear un nuevo <link>producto</link>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/<link>Producto</link>'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Error en la creación del <link>producto</link>
+  /<link>productos</link>/{pid}:
+    get:
+      summary: Obtener un <link>producto</link> por ID
+      parameters:
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del <link>producto</link>
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: <link>Producto</link> no encontrado
+    put:
+      summary: Actualizar un <link>producto</link> por ID
+      parameters:
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del <link>producto</link>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/<link>Producto</link>'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Error en la actualización del <link>producto</link>
+    delete:
+      summary: Eliminar un <link>producto</link> por ID
+      parameters:
+        - in: path
+          name: pid
+          schema:
+            type: string
+          required: true
+          description: ID del <link>producto</link>
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: <link>Producto</link> no encontrado
+components:
+  schemas:
+    <link>Producto</link>:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        owner:
+          type: string
+
+# ---------------------------------- carros ---------------------------------- #
+paths:
+  /carts/{cid}:
+    get:
+      summary: Obtener carrito por ID
+      parameters:
+        - name: cid
+          in: path
+          description: ID del carrito
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Carrito encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Carrito no encontrado
+          content:
+            application/json:
+              example:
+                msg: Carrito no encontrado
+
+  /carts:
+    post:
+      summary: Crear un nuevo carrito
+      responses:
+        '200':
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Error de validación
+          content:
+            application/json:
+              example:
+                msg: Error de validación
+
+  /carts/{cid}/{pid}:
+    put:
+      summary: Actualizar carrito
+      parameters:
+        - name: cid
+          in: path
+          description: ID del carrito
+          required: true
+          schema:
+            type: string
+        - name: pid
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: string
+      responses:
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              example:
+                msg: No encontrado
+
+    patch:
+      summary: Actualizar cantidad del producto en el carrito
+      parameters:
+        - name: cid
+          in: path
+          description: ID del carrito
+          required: true
+          schema:
+            type: string
+        - name: pid
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              required:
+                - quantity
+      responses:
+        '200':
+          description: Producto actualizado exitosamente en el carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              example:
+                msg: No encontrado
+
+    delete:
+      summary: Eliminar producto del carrito
+      parameters:
+        - name: cid
+          in: path
+          description: ID del carrito
+          required: true
+          schema:
+            type: string
+        - name: pid
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto eliminado exitosamente del carrito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              example:
+                msg: No encontrado
+
+  /carts/{cid}/empty:
+    delete:
+      summary: Vaciar carrito
+      parameters:
+        - name: cid
+          in: path
+          description: ID del carrito
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Carrito vaciado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              example:
+                msg: No encontrado
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        id:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required:
+        - id
+        - products
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+      required:
+        - id
+        - name
+        - price
+
+# ---------------------------------- tickets --------------------------------- #
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: API de Tickets
+  description: API para gestionar tickets
+paths:
+  /tickets/generate:
+    post:
+      summary: Generar un ticket
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: No autorizado
+        '404':
+          description: Error al generar el ticket
+components:
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        createdAt:
+          type: string
+
+# --------------------------------- usuarios --------------------------------- #
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: API de Usuarios
+  description: API para gestionar usuarios
+paths:
+  /users/{id}:
+    get:
+      summary: Obtener un usuario por ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Usuario no encontrado
+  /users/current:
+    get:
+      summary: Obtener el usuario actual
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: No autorizado
+        '404':
+          description: Usuario no encontrado
+  /users/logout:
+    post:
+      summary: Cerrar sesión del usuario
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: No autorizado
+        '500':
+          description: Error al cerrar sesión
+  /users/resetpass:
+    post:
+      summary: Restablecer contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Error al enviar el correo electrónico
+  /users/updatepass:
+    post:
+      summary: Actualizar contraseña
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+              required:
+                - password
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Contraseña inválida
+        '403':
+          description: Token expirado
+        '500':
+          description: Error al actualizar la contraseña
+  /users/updaterole/{uid}:
+    put:
+      summary: Actualizar rol de usuario
+      parameters:
+        - in: path
+          name: uid
+          schema:
+            type: string
+          required: true
+          description: ID del usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+              required:
+                - role
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: No autorizado
+        '500':
+          description: Error al actualizar el rol del usuario
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        role:
+          type: string

@@ -1,0 +1,53 @@
+components:
+  parameters:
+    schemas:
+      ProductsPost:
+        type: object
+        required:
+          - title
+          - description
+          - code
+          - price
+          - stock
+          - category
+          - status
+          - thumbnails
+          - owner
+        properties:
+          title:
+            type: string
+            description: Titulo del producto
+          description:
+            type: string
+            description: Resumen de las caracteristicas del producto
+          code:
+            type: string
+            description: Codigo unico que identifica al producto
+          price:
+            type: number
+            description: Precio del producto
+          stock:
+            type: number
+            description: Cantidad en el inventario
+          category:
+            type: string
+            description: Tipo del producto - Terminado, MP, SE, INS
+          status:
+            type: boolean
+            description: Estado del producto 
+          thumbnails:
+            type: array
+            description: Imagenes del producto
+          owner:
+            type: string
+            description: Creador del producto. Por defecto, Admin
+        example:
+          title: Notebook HP
+          description: Notebook HP i7 125gb
+          code: HP0001
+          price: 1000
+          stock: 10
+          category: pterm
+          status: true
+          thumbnails: ['../img/notebook.img', '../img/notebook2.img']
+          

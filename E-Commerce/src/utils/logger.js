@@ -1,5 +1,6 @@
 import { __dirname } from '../utils.js';
 import { addColors, createLogger, format, transports } from 'winston';
+import config from '../config/config.js';
 const { combine, printf, timestamp, colorize } = format;
 
 const customParams = {
@@ -22,7 +23,7 @@ const customParams = {
 };
 
 let envTransports;
-if(process.env.ENVIRONMENT === 'development') {
+if(config.ENVIRONMENT === 'development') {
     envTransports = [
         new transports.Console({ 
             level: 'debug',
@@ -60,7 +61,7 @@ if(process.env.ENVIRONMENT === 'development') {
 const logConfig = {
     levels: customParams.levels,
     transports: envTransports,
-    env: process.env.ENVIRONMENT
+    env: config.ENVIRONMENT
 };
 
 /* ------------------------------- middleware ------------------------------- */

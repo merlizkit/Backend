@@ -1,0 +1,103 @@
+# es el esquema de la respuesta. De las respuestas de cada metodo de la entidad del producto: create, delete, etc. En este caso el product controller
+components:
+  schemas:
+    Products:
+      create:
+        type: object
+        properties:
+          # salen del DTO pero no tengo DTO de producto. si el dto cambia o agrega algun campo, tiene que figurar acá.
+          # ejemplo:
+          id:
+            type: string
+            description: Id del producto
+          title:
+            type: string
+            description: Nombre del producto
+          description:
+            type: string
+            description: Descripción del producto
+          code:
+            type: string
+            description: Código del producto
+          price:
+            type: number
+            description: Precio del producto
+          stock:
+            type: number
+            description: Inventario del producto
+          category:
+            type: string
+            description: Clasificación del producto - pterm, selab, mprim o insum
+          status:
+            type: boolean
+            description: Estado de activación del producto
+          thumbnails:
+            type: array
+            description: Imagenes del producto
+          owner:
+            type: string
+            description: Propietario del producto
+        example:
+          id: 64bee01d81d92884ef61c60c
+          title: Silla pino blanca
+          description: Silla de madera de pino blanca
+          code: PT001
+          price: 5000
+          stock: 1
+          category: pterm
+          status: true
+          thumbnails: [./img1.jpg, ./img2.jpg]
+          owner: pepito@gmail.com
+      getAllProducts:
+        type: array
+        items:
+          properties:
+            title:
+              type: string
+              description: Titulo del producto
+              # el example tambien puede ir acá
+              example: Notebook HP
+            description:
+              type: string
+              description: Resumen de las caracteristicas del producto
+              example: Notebook HP i7 125gb
+            code:
+              type: string
+              description: Codigo unico que identifica al producto
+              example: HP0001
+            price:
+              type: number
+              description: Precio del producto
+              example: 1000
+            stock:
+              type: number
+              description: Cantidad en el inventario
+              example: 10
+            category:
+              type: string
+              description: Tipo del producto - Terminado, MP, SE, INS
+              example: pterm
+      validationError:
+        type: object
+        properties:
+          msg:
+            type: string
+            description: Error de validacion de schema
+        example:
+          msg: Error de validacion de schema
+      notFound:
+        type: object
+        properties:
+          msg:
+            type: string
+            description: Error de servidor
+        examples:
+          msg: Error de servidor
+      errorGetById:
+        type: object
+        properties:
+          msg:
+            type: string
+            description: Error de busqueda por id
+        examples:
+          msg: ID de producto inexistente
