@@ -38,7 +38,6 @@ export const updateCart = async (req, res, next) => {
     try {
         const { pid, cid } = req.params;
         const authUpd = await prodService.getById(pid);
-        console.log('authUpd', authUpd);
         if (req.user.email == authUpd.owner) res.status(404).json({msg: 'Cant add owned products to own cart'});
         else {
             const cartUpd = await cartService.updateCart(cid, pid);

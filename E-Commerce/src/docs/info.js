@@ -12,5 +12,5 @@ export const info = {
             }
         ]
     },
-    apis: ['./src/docs/aria*.yml']
+    apis: ['./src/docs/*.yml']
 };

@@ -1,53 +1,192 @@
 components:
   parameters:
     schemas:
-      ProductsPost:
+# --------------------------------- productos -------------------------------- #
+      Product:
         type: object
-        required:
-          - title
-          - description
-          - code
-          - price
-          - stock
-          - category
-          - status
-          - thumbnails
-          - owner
         properties:
+          id:
+            type: string
+            description: Id del producto
           title:
             type: string
-            description: Titulo del producto
+            required: true
           description:
             type: string
-            description: Resumen de las caracteristicas del producto
+            required: true
           code:
             type: string
-            description: Codigo unico que identifica al producto
+            required: true
+            unique: true
           price:
             type: number
-            description: Precio del producto
+            required: true
           stock:
             type: number
-            description: Cantidad en el inventario
+            required: true
           category:
             type: string
-            description: Tipo del producto - Terminado, MP, SE, INS
+            required: true
+            enum:
+              - pterm
+              - selab
+              - mprim
+              - insum
           status:
             type: boolean
-            description: Estado del producto 
+            default: true
+            required: true
           thumbnails:
             type: array
-            description: Imagenes del producto
+            default: []
+            items:
+              type: string
           owner:
             type: string
-            description: Creador del producto. Por defecto, Admin
+            default: admin
         example:
-          title: Notebook HP
-          description: Notebook HP i7 125gb
-          code: HP0001
-          price: 1000
-          stock: 10
+          id: 64bee01d81d92884ef61c60c
+          title: Silla pino blanca
+          description: Silla de madera de pino blanca
+          code: PT001
+          price: 5000
+          stock: 1
           category: pterm
           status: true
-          thumbnails: ['../img/notebook.img', '../img/notebook2.img']
-          
+          thumbnails: [./img1.jpg, ./img2.jpg]
+          owner: pepito@gmail.com
+      getProduct:
+        type: object
+        properties:
+          id:
+            type: string
+            required: true
+        example:
+          id: 64bee01d81d92884ef61c60c
+# ---------------------------------- carros ---------------------------------- #
+      CartProduct:
+        type: object
+        properties:
+          prodId:
+            type: string
+            required: true
+          quantity:
+            type: number
+            required: true
+        example:
+              prodId: 64bee01d81d92884ef61c60d,
+              quantity: 26
+      Cart:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID del carrito
+          products:
+            type: array
+            items:
+              $ref: "#/definitions/CartProduct"
+        example:
+          id: 6508f0baca073f69f21902bd
+          products: [
+            {
+              prodId: 64bee01d81d92884ef61c60d,
+              quantity: 26
+            },
+            {
+              prodId: 64bee01d81d92884ef61c60c,
+              quantity: 5
+            },
+            {
+              prodId: 64bee01d81d92884ef61c60e,
+              quantity: 2
+            },
+            {
+              prodId: 652d52d6a0e1d8ec9de6b7d6,
+              quantity: 1
+            },
+          ]
+      getCart:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID del carrito
+        example:
+          id: 6508f0baca073f69f21902bd
+      cartAndProductId:
+        type: object
+        properties:
+          cid:
+            type: string
+            description: ID del carrito
+          pid:
+            type: string
+            description: ID del producto
+        example:
+          cid: 6508f0baca073f69f21902bd
+          pid: 64bee01d81d92884ef61c60d
+      updateQty:
+        type: object
+        properties:
+          cid:
+            type: string
+            description: ID del carrito
+          pid:
+            type: string
+            description: ID del producto
+          quantity:
+            type: number
+            description: Cantidad del producto a agregar
+        example:
+          cid: 6508f0baca073f69f21902bd
+          pid: 64bee01d81d92884ef61c60d
+          quantity: 2
+# --------------------------------- usuarios --------------------------------- #
+      User:
+        type: object
+        properties:
+          first_name:
+            type: string
+            required: true
+          last_name:
+            type: string
+            required: true
+          email:
+            type: string
+            required: true
+          age:
+            type: number
+            required: true
+          password:
+            type: string
+            required: true
+          cartId:
+            type: string
+            required: false
+          role:
+            type: string
+            default: "user"
+        example:
+          id: 6508f0baca073f69f21902bf
+          first_name: Matias
+          last_name: Merlo
+          email: matias@gmail.com
+          age: 38
+          password: 111111
+          cartId: 6508f0baca073f69f21902bd
+          role: user
+      userId:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID del usuario
+        example:
+          id: 6508f0baca073f69f21902bf
+# ------------------------------- autenticación ------------------------------ #
+  securitySchemes:
+    BearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: [] 

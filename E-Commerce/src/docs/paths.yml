@@ -1,76 +1,61 @@
 paths:
+# --------------------------------- productos -------------------------------- #
   /api/products:
     get:
       tags:
       - Products
-      summary: Listar productos de la BD
+      summary: Obtener todos los productos
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Muestra la lista de productos
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/getAllProducts' #la ruta del archivo response
-    post:  isAuth
+                $ref: "#/components/schemas/Products/getAllProducts"
+    post:
       tags:
       - Products
-      summary: Registro de nuevo producto en la BD
+      summary: Crear un nuevo producto
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/ProductsPost' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/Product"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: Creado
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Products/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Products/validationError'
+                $ref: "#/components/schemas/Products/product"
+      security:
+        - BearerAuth: []
   /api/products/{pid}:
     get:
       tags:
       - Products
-      summary: Registro de nuevo producto en la BD
+      summary: Obtener un producto por ID
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/ProductsPost' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/getProduct"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Products/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Products/validationError'
-    put: isAuth
+                $ref: "#/components/schemas/Products/product"
+    put:
       tags:
       - Products
-      summary: Registro de nuevo producto en la BD
+      summary: Actualizar un producto por ID
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/ProductsPost' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/Product"
       responses:
         #los mismos codigos usados en el product controller
         200:
@@ -78,480 +63,231 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/create' #la ruta del archivo response
+                $ref: '#/components/schemas/Products/product' #la ruta del archivo response
         500:
           description: Error de servidor
-          $ref: '#/components/schemas/Products/notFound'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/notFound'
         404:
           description: Error de validacion del schema
-          $ref: '#/components/schemas/Products/validationError'
-    delete: isAuth
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/validationError'
+      security:
+        - BearerAuth: []
+    delete:
       tags:
       - Products
-      summary: Registro de nuevo producto en la BD
+      summary: Eliminar un producto por ID
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/ProductsPost' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/Product/getProduct"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: Se eliminó el producto correctamente
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Products/notFound'
+                $ref: '#/components/schemas/Products/product'
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Products/validationError'
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/notFound'
+      security:
+        - BearerAuth: []
+# ---------------------------------- carros ---------------------------------- #
   /api/carts:
-    post: isAuth
+    post:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Crear un nuevo carrito
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/Cart"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: Creado
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
+                $ref: "#/components/schemas/Carts/cart"
         404:
           description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carts/creationError'
+      security:
+        - BearerAuth: []
   /api/carts/{cid}:
     get:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Obtener un carrito por ID
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/getCart"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
+                $ref: "#/components/schemas/Carts/cart"
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
-    put: isAuth
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carts/notFound'
+    put:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Reemplazar un carrito por ID
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/getCart"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
-    delete: isAuth
+                $ref: "#/components/schemas/Carts/cart"
+      security:
+        - BearerAuth: []
+    delete:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Vaciar un carrito por ID
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/getCart"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
+                $ref: "#/components/schemas/Carts/cart"
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
+          description: Carrito no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carts/notFound'
+      security:
+        - BearerAuth: []
   /api/carts/{cid}/products/{pid}:
-    post: isAuth
+    post:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Actualizar carrito con un nuevo producto
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/cartAndProductId"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
+                $ref: "#/components/schemas/Carts/cart"
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
-    put: isAuth
+          description: Carrito o producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carts/notFound'
+      security:
+        - BearerAuth: []
+    put:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Actualizar la cantidad de un producto en el carrito
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/updateQty"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
+                $ref: "#/components/schemas/Carts/cart"
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
-    delete: isAuth
+          description: Carrito o producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carts/notFound'
+      security:
+        - BearerAuth: []
+    delete:
       tags:
       - Carts
-      summary: Registro de nuevo producto en la BD
+      summary: Eliminar un producto del carrito
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/cartAndProductId"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
+                $ref: "#/components/schemas/Carts/cart"
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products/notFound'
+      security:
+        - BearerAuth: []
   /api/carts/{cid}/purchase:
-    put: isAuth
-      tags:
-      - Carts
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Carts' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Carts/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Carts/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Carts/validationError'
-  /api/tickets:
-    post:
-      tags:
-      - Carts
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Tickets' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Tickets/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Tickets/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Tickets/validationError'
-  /users/register:
-    post: passport
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/login:
-    post: passport
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/logout:
-    post:
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/private:
-    post: isAuth
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/reset-pass:
-    post:
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/new-pass:
     put:
       tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
+      - Carts
+      summary: Generar un ticket de compra para el carrito
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
+              $ref: "#/components/parameters/schemas/userId"
       responses:
-        #los mismos codigos usados en el product controller
         200:
-          description: Se registro el producto correctamente
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
+                $ref: "#/components/schemas/Tickets/ticket"
         404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/premium/{uid}:
-    put:
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
+          description: Carrito o producto no encontrado
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/github:
-    get: passport
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
-  /users/githubcallback:
-    get: passport
-      tags:
-      - Users
-      summary: Registro de nuevo producto en la BD
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/parameters/schemas/Users' # la ruta del archivo requests
-        required: true
-      responses:
-        #los mismos codigos usados en el product controller
-        200:
-          description: Se registro el producto correctamente
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users/create' #la ruta del archivo response
-        500:
-          description: Error de servidor
-          $ref: '#/components/schemas/Users/notFound'
-        404:
-          description: Error de validacion del schema
-          $ref: '#/components/schemas/Users/validationError'
+                $ref: '#/components/schemas/Tickets/creationError'
+      security:
+        - BearerAuth: []
