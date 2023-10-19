@@ -6,6 +6,7 @@ export default {
     PERSISTENCE: process.env.PERSISTENCE,
 
     MONGO_ATLAS_URL : process.env.MONGO_ATLAS_URL,
+    MONGO_ATLAS_URL_TEST : process.env.MONGO_ATLAS_URL_TEST,
     MONGO_LOCAL_URL : process.env.MONGO_LOCAL_URL,
     SECRET_MONGO : process.env.SECRET_MONGO,
     

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "test": "mocha src/tests/productDao.test.js",
+    "test:all": "mocha src/tests --recursive"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "dependencies": {
     "@faker-js/faker": "^8.1.0",
     "bcrypt": "^5.1.0",
+    "chai": "^4.3.10",
     "connect-mongo": "^5.0.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
@@ -21,6 +24,7 @@
     "express-session": "^1.17.3",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
+    "mocha": "^10.2.0",
     "mongoose": "^7.4.2",
     "mongoose-paginate-v2": "^1.7.31",
     "morgan": "^1.10.0",
