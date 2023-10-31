@@ -81,3 +81,5 @@ socketServer.on('connection', async (socket) => {
         socket.broadcast.emit('chat:typing', user)
     })
 })
+
+export default app; // para usar en jest

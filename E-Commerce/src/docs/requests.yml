@@ -184,6 +184,18 @@ components:
             description: ID del usuario
         example:
           id: 6508f0baca073f69f21902bf
+      userLogin:
+        type: object
+        properties:
+          email:
+            type: string
+            required: true
+          password:
+            type: string
+            required: true
+        example:
+          email: user@gmail.com
+          password: 12345
 # ------------------------------- autenticación ------------------------------ #
   securitySchemes:
     BearerAuth: 

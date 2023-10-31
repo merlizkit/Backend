@@ -1,4 +1,41 @@
 paths:
+# --------------------------------- usuarios --------------------------------- #
+  /users/login:
+    post:
+      tags:
+      - Users
+      summary: Hacer el login.
+      requestBody:
+        parameters:
+          - name: username
+            in: query
+            description: The user name for login
+            required: false
+            schema:
+              type: string
+          - name: password
+            in: query
+            description: The password for login in clear text
+            required: false
+            schema:
+              type: string
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/parameters/schemas/userLogin"
+      responses:
+        200:
+          description: Usuario Logueado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users/userLogin"
+        404:
+          description: Datos de ingreso incorrectos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users/logError'
 # --------------------------------- productos -------------------------------- #
   /api/products:
     get:
@@ -64,18 +101,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Products/product' #la ruta del archivo response
-        500:
+        404:
           description: Error de servidor
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Products/notFound'
-        404:
-          description: Error de validacion del schema
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Products/validationError'
       security:
         - BearerAuth: []
     delete:

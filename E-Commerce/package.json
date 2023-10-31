@@ -1,13 +1,16 @@
 {
-  "name": "d32-mock-error",
+  "name": "ecommerce",
   "version": "1.0.0",
   "main": "./src/server.js",
   "type": "module",
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
-    "test": "mocha src/tests/productDao.test.js",
-    "test:all": "mocha src/tests --recursive"
+    "test": "mocha src/tests/dao/productDao.test.js",
+    "test:all": "mocha src/tests --recursive",
+    "test:node": "node src/tests/dao/productDao.test.node.js",
+    "testjest": "set NODE_OPTIONS=--experimental-vm-modules && npx jest /src/tests/app/app.test.js",
+    "test:api": "node src/tests/app/test.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +26,7 @@
     "express-handlebars": "^7.1.1",
     "express-session": "^1.17.3",
     "helmet": "^7.0.0",
+    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
     "mocha": "^10.2.0",
     "mongoose": "^7.4.2",
@@ -37,6 +41,7 @@
     "passport-local": "^1.0.0",
     "sequelize": "^6.33.0",
     "socket.io": "^4.7.2",
+    "supertest": "^6.3.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "winston": "^3.10.0"

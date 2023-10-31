@@ -214,6 +214,18 @@ components:
           password: 111111
           cartId: 6508f0baca073f69f21902bd
           role: user
+      userLogin:
+        type: object
+        properties:
+          email:
+            type: string
+            required: true
+          password:
+            type: string
+            required: true
+        example:
+          email: user@gmail.com
+          password: 12345
       creationError:
         type: object
         properties:
@@ -238,14 +250,14 @@ components:
             description: Error de servidor
         examples:
           msg: Error de servidor
-      errorGetById:
+      logError:
         type: object
         properties:
           msg:
             type: string
-            description: Error de busqueda por id
+            description: Credenciales incorrectas
         examples:
-          msg: ID de usuario inexistente
+          msg: Credenciales incorrectas
     Tickets:
       ticket:
         type: object
