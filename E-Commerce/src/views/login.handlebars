@@ -1,6 +1,6 @@
 <h1>Inicio de sesión</h1>
 <div class="container w-50">
-    <form id="login" action='/users/login' method='post'>
+    <form id="login" action='/api/users/login' method='post'>
         <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" name="email" class="form-control" id="email">
@@ -16,7 +16,7 @@
 </div>
 <br>
 <div class="container w-50 d-flex justify-content-center">
-  <button onclick="location.href='/users/github'" class="btn btn-primary w-25">Iniciar sesión con GitHub</button>
+  <button onclick="location.href='/api/users/github'" class="btn btn-primary w-25">Iniciar sesión con GitHub</button>
 </div>
 
 <h2>¿Usuario nuevo?</h2>

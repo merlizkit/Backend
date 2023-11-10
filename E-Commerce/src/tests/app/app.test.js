@@ -17,7 +17,7 @@ describe('Tests integrales Api Products', () => {
     //             age: 38,
     //             password: "123456"
     //     };
-    //     const response = await request(app).post('/users/register').send(doc);
+    //     const response = await request(app).post('/api/users/register').send(doc);
     //     const id = response.body._id;
     //     const emailResponse = response.body.email;
     //     expect(id).toBeDefined();                                          // verifico que el id esté llegando
@@ -30,7 +30,7 @@ describe('Tests integrales Api Products', () => {
             email: 'merlizkit@gmail.com',
             password: '12345'
         };
-        const response = await request(app).post('/users/login').send(doc);
+        const response = await request(app).post('/api/users/login').send(doc);
         console.log(response);
         const id = response.body._id;
         const emailResponse = response.body.title;

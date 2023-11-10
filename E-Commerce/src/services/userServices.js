@@ -46,7 +46,15 @@ export const updatePass = async (user, password) => {
 
 export const updateRole = async (uid, role) => {
     try {
-        return await userDao.update(uid, {role: role});
+        return await userDao.updateRole(uid, {role: role});
+    } catch (error) {
+        throw new Error(error.stack);
+    }
+}
+
+export const docUpload = async (uid, docs) => {
+    try {
+        return await userDao.docUpload(uid, docs);
     } catch (error) {
         throw new Error(error.stack);
     }

@@ -1,6 +1,6 @@
 paths:
 # --------------------------------- usuarios --------------------------------- #
-  /users/login:
+  /api/users/login:
     post:
       tags:
       - Users

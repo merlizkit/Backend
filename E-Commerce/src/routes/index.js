@@ -20,7 +20,7 @@ export default class MainRouter {
             .use('/api/carts', cartsRouter)
             .use('/api/tickets', ticketsRouter)
             .use('/session', sessionsRouter)
-            .use('/users', userRouter)
+            .use('/api/users', userRouter)
             .use('/test', testRouter)
             .use('/', viewsRouter)
     }

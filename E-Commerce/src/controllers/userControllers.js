@@ -88,3 +88,36 @@ export const updateRole = async (req, res, next) => {
         req.logger.error(error.stack);
     }
 }
+
+export const docUpload = async (req, res, next) => {
+    try {
+        const { uid } = req.params;
+        let docs = [];
+        if(req.files.identification) {
+            const ident = {
+                name: 'identification',
+                reference: req.files.identification[0].path
+            }
+            docs.push(ident)
+        }
+        if(req.files.addressCert) {
+            const ident = {
+                name: 'addressCert',
+                reference: req.files.addressCert[0].path
+            }
+            docs.push(ident)
+        }
+        if(req.files.accountCert) {
+            const ident = {
+                name: 'accountCert',
+                reference: req.files.accountCert[0].path
+            }
+            docs.push(ident)
+        }
+        const uplDocs = await service.docUpload(uid, docs);
+        if (!uplDocs) return createResponse(res, 400, "Unauthorized");
+        return createResponse(res, 200, 'Role updated');
+    } catch (error) {
+        req.logger.error(error.stack);
+    }
+}

@@ -7,7 +7,15 @@ const userSchema = new Schema({
     age: { type: Number, required: true },
     password: { type: String, required: true },
     cartId: { type: Schema.Types.ObjectId, ref: 'carts' },
-    role: { type: String, default: 'user' }
+    role: { type: String, default: 'user' },
+    documents: [
+        { 
+            name: { type: String },
+            reference: { type: String }
+        }
+    ],
+    status: { type: Boolean, default: false },
+    last_connection: { type: Date }
 });
 
 export const UserModel = model('users', userSchema);

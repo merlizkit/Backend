@@ -26,13 +26,21 @@ export const getById = async (req, res, next) => {
 export const create = async (req, res, next) => {
         try {
             let owner;
+            let newProd;
+            const thumbnails = req.files.map(thumb => thumb.path);
             if(req.user.role != 'admin') { owner = req.user.email};
-            const newProd = await service.create(
-                Object.keys(req.body).reduce((result, key) => {
-                    result[key] = { ...req.body[key], owner };
-                    return result[0];
-                }, {})
-            );
+            if(typeof req.body === 'object') {
+                newProd = await service.create(
+                    { ...req.body, thumbnails, owner }
+                )
+            } else {
+                newProd = await service.create(
+                    Object.keys(req.body).reduce((result, key) => {
+                        result[key] = { ...req.body[key], thumbnails, owner };
+                        return result[0];
+                    }, {})
+                );
+            };
             req.logger.debug('Prod id: ' + newProd._id);
             if(!newProd) res.status(404).json({msg: 'Creation error'});
             else res.status(200).json(newProd);

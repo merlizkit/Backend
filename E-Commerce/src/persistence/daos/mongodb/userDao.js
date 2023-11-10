@@ -44,7 +44,10 @@ export default class UserDao extends MongoDao {
             if(userExists) {
                 const passValid = isValidPassword(password, userExists)
                 if(!passValid) return false;
-                else return userExists;
+                else {
+                    this.update(userExists._id, { last_connection: Date.now() });
+                    return userExists
+                };
             }
             else return false;
         } catch (error) {
@@ -107,6 +110,37 @@ export default class UserDao extends MongoDao {
             if(isEqual) return false;
             const newPass = createHash(password);
             return await this.update(user._id, { password: newPass })
+        } catch (error) {
+            throw new Error(error.stack);
+        }
+    }
+
+    async updateRole(uid, {role: role}) {
+        try {
+            if(role === 'user') return await this.update(uid, {role: role})
+            else {
+                const user = await this.getById(uid);
+                if(!user) return false;
+                else {
+                    if(user.status != true) return false;
+                    else return await this.update(uid, {role: role}); 
+                }
+            }
+        } catch (error) {
+            throw new Error(error.stack);
+        }
+    }
+
+    async docUpload(uid, docs) {
+        try {
+            const user = await this.getById(uid);
+            if(!user) return false;
+            else {
+                const updUser = await this.update(uid, {$push: {documents: docs}});
+                const status = await UserModel.find({_id: uid}).find({"documents.name": { $all: ['identification', 'addressCert', 'accountCert'] }})
+                console.log('status ', status);
+                return updUser
+            }
         } catch (error) {
             throw new Error(error.stack);
         }
