@@ -4,6 +4,7 @@ import { UserModel } from "./models/userModel.js";
 import CartDaoMongoDB from "./cartDao.js";
 import config from '../../../config/config.js';
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
 const cartDao = new CartDaoMongoDB();
 
 export default class UserDao extends MongoDao {
@@ -136,9 +137,15 @@ export default class UserDao extends MongoDao {
             const user = await this.getById(uid);
             if(!user) return false;
             else {
+                /* ------------- si existe una versión anterior de los documentos cargados, borra la referencia y el archivo ------------ */
+                for (let index = 0; index < docs.length; index++) {
+                    const ref = user.documents.find(doc => doc.name === docs[index].name);
+                    ref ? fs.unlinkSync(ref.reference) : null;
+                    await this.update(uid, {$pull: {documents: {name: docs[index].name}}});
+                }
+
+                /* ------------------ carga la nueva referencia del documento ------------------ */
                 const updUser = await this.update(uid, {$push: {documents: docs}});
-                const status = await UserModel.find({_id: uid}).find({"documents.name": { $all: ['identification', 'addressCert', 'accountCert'] }})
-                console.log('status ', status);
                 return updUser
             }
         } catch (error) {

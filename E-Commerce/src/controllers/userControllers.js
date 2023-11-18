@@ -116,7 +116,7 @@ export const docUpload = async (req, res, next) => {
         }
         const uplDocs = await service.docUpload(uid, docs);
         if (!uplDocs) return createResponse(res, 400, "Unauthorized");
-        return createResponse(res, 200, 'Role updated');
+        return createResponse(res, 200, 'Document uploaded successfully');
     } catch (error) {
         req.logger.error(error.stack);
     }

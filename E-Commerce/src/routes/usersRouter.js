@@ -2,7 +2,7 @@ import { Router } from "express";
 import { getByIdDTO, logout, resetPass, updatePass, updateRole, docUpload } from "../controllers/userControllers.js";
 import passport from 'passport';
 import { isAuth } from '../middlewares/isAuth.js';
-import {uploader} from '../middlewares/multer.js';
+import { uploader } from '../middlewares/multer.js';
 import { create } from "../controllers/cartController.js";
 const router = Router();
 
