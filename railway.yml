@@ -1,0 +1,6 @@
+version: 2
+services:
+  - name: E-Commerce
+    github:
+      branch: main
+      folder: Backend/E-Commerce
