@@ -5,6 +5,15 @@ import config from '../config/config.js';
 import factory from '../persistence/daos/factory.js';
 const { userDao } = factory;
 
+export const getAllDTO = async (req, res, next) => {
+    try {
+        const response = await service.getAllDTO();
+        res.status(200).json(response);
+    } catch (error) {
+        throw new Error(error.stack);
+    }
+};
+
 export const getByIdDTO = async (req, res, next) => {
     try {
         const user = await service.getByIdDTO(req.user.id);
@@ -80,14 +89,16 @@ export const checkToken = async (req, res, next) => {
 export const updateRole = async (req, res, next) => {
     try {
         const { uid } = req.params;
-        const { role } = req.body;
-        const updStat = await service.updateRole(uid, role);
-        if (!updStat) return createResponse(res, 400, "Unauthorized");
+        // const { role } = req.body;
+        // console.log('uid', uid);
+        // console.log('role', role);
+        const updStat = await service.updateRole(uid);
+        if (!updStat) return createResponse(res, 400, "User not found or admin");
         return createResponse(res, 200, 'Role updated');
     } catch (error) {
         req.logger.error(error.stack);
     }
-}
+};
 
 export const docUpload = async (req, res, next) => {
     try {
@@ -120,4 +131,25 @@ export const docUpload = async (req, res, next) => {
     } catch (error) {
         req.logger.error(error.stack);
     }
-}
+};
+
+export const removeById = async (req, res) => {
+    try {
+        const response = await service.removeById(req.params.uid);
+        if (!response) return createResponse(res, 400, "Unautorized");
+        else res.redirect(`/adminmenu`)
+    } catch (error) {
+        req.logger.error(error.stack);
+    }
+};
+
+/* --------- borra los usuarios que no tuvieron conexiones recientes -------- */
+export const removeOld = async (req, res) => {
+    try {
+        const response = await service.removeOld();
+        if (!response) return createResponse(res, 400, "Unautorized");
+        return createResponse(res, 200, `${response.deletedCount} unused users deleted successfully`);
+    } catch (error) {
+        req.logger.error(error.stack);
+    }
+};

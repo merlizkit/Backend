@@ -12,7 +12,7 @@ router
     })
     .get('/cart/:cid', sessionData, controller.getCart)
     .get('/products', sessionData, controller.getAll)
-    .get('/chat', isAuth, (req, res) => { res.render('chat') })
+    .get('/chat', sessionData, isAuth, (req, res) => { res.render('chat') })
     .get('/login', controller.login)
     .get('/register', controller.register)
     .get('/error-login', controller.errorLogin)
@@ -29,5 +29,6 @@ router
         req.logger.fatal("Prueba logger fatal")
         res.render('loggerTest')
     })
+    .get('/adminmenu', sessionData, isAuth, controller.getUsersDTO)
 
 export default router;

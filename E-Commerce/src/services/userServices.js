@@ -7,6 +7,16 @@ const userDao = new UserDao();
 //import UserDaoFS from '../daos/filesystem/userDao.js';
 //const userDao = new UserDaoFS();
 
+export const getAllDTO = async () => {   
+    try {
+        const response = await userRepository.getAllDTO();
+        return response;
+    }
+    catch (error) {
+        throw new Error(error.stack);
+    }
+}
+
 export const getByIdDTO = async (id) => {   
     try {
         const response = await userRepository.getByIdDTO(id);
@@ -26,6 +36,16 @@ export const getById = async (req, res, next) => {
     }
 };
 
+export const find = async (obj) => {
+    try {
+        const response = await userRepository.find(obj);
+        if(!response) return false;
+        return response
+    } catch (error) {
+        throw new Error(error.stack);
+    }
+}
+
 export const resetPass = async (email) => {
     try {
         const { userExists: user, token } = await userDao.resetPass(email);
@@ -44,9 +64,9 @@ export const updatePass = async (user, password) => {
     }
 };
 
-export const updateRole = async (uid, role) => {
+export const updateRole = async (uid) => {
     try {
-        return await userDao.updateRole(uid, {role: role});
+        return await userDao.updateRole(uid);
     } catch (error) {
         throw new Error(error.stack);
     }
@@ -59,3 +79,19 @@ export const docUpload = async (uid, docs) => {
         throw new Error(error.stack);
     }
 }
+
+export const removeOld = async (obj) => {
+    try {
+        return await userDao.removeOld();
+    } catch (error) {
+        throw new Error(error.stack);
+    }
+};
+
+export const removeById = async (uid) => {
+    try {
+        return await userDao.removeById(uid);
+    } catch (error) {
+        throw new Error(error.stack);
+    }
+};

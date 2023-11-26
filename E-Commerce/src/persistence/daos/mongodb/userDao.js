@@ -5,6 +5,8 @@ import CartDaoMongoDB from "./cartDao.js";
 import config from '../../../config/config.js';
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
+import { logger2 } from "../../../utils/logger.js";
+import { sendMail } from "../../../services/mailingServices.js";
 const cartDao = new CartDaoMongoDB();
 
 export default class UserDao extends MongoDao {
@@ -18,7 +20,7 @@ export default class UserDao extends MongoDao {
             const existUser = await this.getByEmail(email);
             if(!existUser) {
                 const cart = await cartDao.newCart();
-                req.logger.debug(cart.id);
+                logger2.info(cart.id);
                 if(email === config.ADMIN_EMAIL && password === config.ADMIN_PASSWORD) {
                     return await UserModel.create({
                         ...user,
@@ -116,16 +118,14 @@ export default class UserDao extends MongoDao {
         }
     }
 
-    async updateRole(uid, {role: role}) {
+    async updateRole(uid) {
         try {
-            if(role === 'user') return await this.update(uid, {role: role})
+            const user = await this.getById(uid);
+            if(!user) return false;
             else {
-                const user = await this.getById(uid);
-                if(!user) return false;
-                else {
-                    if(user.status != true) return false;
-                    else return await this.update(uid, {role: role}); 
-                }
+                if(user.role === 'admin') return false;
+                if(user.role === 'user') return await this.update(uid, {role: 'premium'})
+                    else return await this.update(uid, {role: 'user'});
             }
         } catch (error) {
             throw new Error(error.stack);
@@ -147,6 +147,38 @@ export default class UserDao extends MongoDao {
                 /* ------------------ carga la nueva referencia del documento ------------------ */
                 const updUser = await this.update(uid, {$push: {documents: docs}});
                 return updUser
+            }
+        } catch (error) {
+            throw new Error(error.stack);
+        }
+    }
+
+    async removeOld() {
+        try {
+            const filter = {last_connection: {$lte: '2023-11-20'}}
+            const mailDel = await this.find(filter)
+            for (let index = 0; index < mailDel.length; index++) {
+                await sendMail(mailDel[index], 'userDeleted');
+            }
+            const delUsers = await this.deleteMany(filter);
+            if(!delUsers) return false;
+            else return delUsers;
+        } catch (error) {
+            throw new Error(error.stack);
+        }
+    }
+
+    async removeById(uid) {
+        try {
+            const userExists = await this.getById(uid);
+            if(!userExists) return false;
+            else {
+                const response = await this.delete(uid);
+                if(!response) return false;
+                else {
+                    await sendMail(userExists, 'userDeleted')
+                    return response
+                };
             }
         } catch (error) {
             throw new Error(error.stack);

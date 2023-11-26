@@ -11,6 +11,6 @@ router
     .get('/:pid', controller.getById)
     .post('/', isAuth, uploader.array('thumbnails',10), controller.create)
     .put('/:pid', isAuth, controller.update)
-    .delete('/:pid', isAuth, controller.remove)
+    .delete('/:pid', controller.remove)
 
 export default router;

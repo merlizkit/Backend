@@ -37,7 +37,7 @@ export default class CartDaoMongoDB {
             CustomError.createError({
                 name: 'Cart update error',
                 cause: genCartErrorMissCart(cartId),
-                message: 'An error occurred while adding the product to the cart',
+                message: 'An error occurred while fetching the cart',
                 model: error.model.modelName || error.model,
                 path: error.path,
                 code: EErrors.CART_NOT_FOUND

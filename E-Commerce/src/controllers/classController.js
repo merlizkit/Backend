@@ -5,16 +5,16 @@ export default class Controllers {
         this.service = service;
     };
 
-    getAll = async (req, res, next) => {
+    async getAll (req, res, next) {
         try {
             const items = this.service.getAll();
             createResponse(res, 200, items);
         } catch (error) {
-        req.logger.error(error.message);
+            req.logger.error(error.message);
         }
     }
 
-    getById = async (req, res, next) => {
+    async getById (req, res, next) {
         try {
             const { id } = req.params;
             const item = this.service.getById(id);
@@ -25,11 +25,11 @@ export default class Controllers {
                 });
             else createResponse(res, 200, item);
         } catch (error) {
-        req.logger.error(error.message);
+            req.logger.error(error.message);
         }
     }
-
-    create = async (req, res, next) => {
+    
+    async create (req, res, next) {
         try {
             const newItem = await this.service.create(req.body);
             if(!newItem)
@@ -39,11 +39,11 @@ export default class Controllers {
                 });
             else createResponse(res, 200, items);
         } catch (error) {
-        req.logger.error(error.message);
+            req.logger.error(error.message);
         }
     }
 
-    update = async (req, res, next) => {
+    async update (req, res, next) {
         try {
             const { id } = req.params;
             const item = this.service.getById(id);
@@ -60,7 +60,7 @@ export default class Controllers {
         }
     };
 
-    delete = async (req, res, next) => {
+    async delete (req, res, next) {
         try {
             const { id } = req.params;
             const item = this.service.getById(id);

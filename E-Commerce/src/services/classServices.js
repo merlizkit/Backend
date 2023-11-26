@@ -3,7 +3,7 @@ export default class Services {
         this.dao = dao;
     };
     
-    getAll = async () => {
+    async getAll () {
         try {
             const items = await this.dao.getAll();
             return items;
@@ -12,7 +12,7 @@ export default class Services {
         }
     };
 
-    getById = async (id) => {
+    async getById (id) {
         try {
             const item = await this.dao.getById(id);
             if(!item) return false;
@@ -22,7 +22,7 @@ export default class Services {
         }
     }
 
-    create = async (obj) => {
+    async create (obj) {
         try {
             const newItem = await this.dao.create(obj);
             if(!newItem) return false;
@@ -32,7 +32,7 @@ export default class Services {
         }
     }
 
-    update = async (id,obj) => {
+    async update (id,obj) {
         try {
             const item = await this.dao.getById(id);
             if(!item) return false;
@@ -42,7 +42,7 @@ export default class Services {
         }
     }
 
-    delete = async (id) => {
+    async delete (id) {
         try {
             const item = await this.dao.getById(id);
             if(!item) return false

@@ -33,6 +33,10 @@ export const isAuth = async (req,res,next) => {
                 if(req.isAuthenticated() && user.role != 'admin') 
                     return next();
                     else res.status(401).send({ msg: 'Unauthorized' })
+            if(req.path === '/adminmenu')
+                if(req.isAuthenticated() && user.role === 'admin') 
+                    return next();
+                    else res.status(401).send({ msg: 'Unauthorized' })
             else next ();
         }
     } catch (error) {

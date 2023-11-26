@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import TicketController from '../controllers/ticketController.js';
+import { sessionData } from '../middlewares/sessionData.js';
 const controller = new TicketController();
 const router = Router();
 
-router.post('/', controller.create);
+router.get('/', sessionData, controller.findByUser);
 
 export default router;

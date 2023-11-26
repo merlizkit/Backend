@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
                 folder += 'profiles';
                 break;
             case 'thumbnails':
-                folder += 'products';
+                folder += '/public/images/products';
                 break;
             case 'identification':
                 folder += 'documents';

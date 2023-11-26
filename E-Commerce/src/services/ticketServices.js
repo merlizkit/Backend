@@ -21,13 +21,13 @@ export default class TicketService extends Services {
             const cart = await getCartById(user.cartId);
             for (const prod of cart.products) {
                 const idProd = prod.prodId;
-                const prodDB = await productDao.getProductById(idProd);
+                const prodDB = await productDao.getById(idProd);
                 if(prod.quantity <= prodDB.stock){
                     const amount = prod.quantity * prodDB.price;
                     amountAcc += amount;
                     removeProd(user.cartId, idProd)
                     const newStock = prodDB.stock - prod.quantity
-                    productDao.updateProduct(idProd, {"stock": newStock})
+                    productDao.update(idProd, {"stock": newStock})
                 } else {
                     cartError.push(prod.prodId);
                 }
@@ -53,5 +53,14 @@ export default class TicketService extends Services {
           if (ticket.code > maxCode) maxCode = Number(ticket.code);                                       
         });
         return maxCode;
+    }
+    
+    async findByUser(obj) {
+        try {
+            const response = await ticketDao.find(obj);
+            return response
+        } catch (error) {
+            throw new Error(error.stack);
+        }
     }
 }

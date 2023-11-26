@@ -1,5 +1,6 @@
 import { createTransport } from 'nodemailer';
 import config from '../config/config.js';
+import { logger2 } from '../utils/logger.js';
 
 const transporter = createTransport({
     service: 'gmail',
@@ -15,7 +16,13 @@ const createMsgRegister = (first_name) => {
     return `<h1>Hola ${first_name}, Bienvenido</h1>`;
 };
 const createMsgReset = (first_name) => {
-    return `<h1>Hola ${first_name}, hace click <a href='http://localhost:8080/api/users/new-pass'>AQUI</a> para reestablecer la contraseña`;
+    return `<h1>Hola ${first_name}, hace click <a href='http://localhost:8080/api/users/new-pass'>AQUI</a> para reestablecer la contraseña</h1>`;
+};
+const createMsgDelete = (first_name) => {
+    return `<h1>Hola ${first_name}, te informamos que tu usuario fue borrado por no ser utilizado</h1>`;
+};
+const createMsgProdDel = (first_name) => {
+    return `<h1>Hola ${first_name}, te informamos que un producto tuyo fue borrado</h1>`;
 };
 export const sendMail = async (user, service, token = null) => {
     try {
@@ -26,6 +33,10 @@ export const sendMail = async (user, service, token = null) => {
         ? msg = createMsgRegister(first_name)
         : service == 'resetPass'
         ? msg = createMsgReset(first_name)
+        : service == 'userDeleted'
+        ? msg = createMsgDelete(first_name)
+        : service == 'prodDeleted'
+        ? msg = createMsgProdDel(first_name)
         : msg = ''
 
         let subj = '';
@@ -34,6 +45,10 @@ export const sendMail = async (user, service, token = null) => {
         ? 'Bienvenido/a'
         : service == 'resetPass'
         ? 'Restablecer la contraseña'
+        : service == 'userDeleted'
+        ? 'Usuario eliminado'
+        : service == 'prodDeleted'
+        ? 'Producto eliminado'
         : ''
 
         const gmailOptions = {
@@ -43,11 +58,11 @@ export const sendMail = async (user, service, token = null) => {
             html: msg
         }
 
-        const resposne = await transporter.sendMail(gmailOptions);
+        const response = await transporter.sendMail(gmailOptions);
         if(token != null) return token;
-        req.logger.info('Email enviado');
+        logger2.info('Email enviado');
 
     } catch (error) {
-        req.logger.error(error.message);
+        throw new Error(error.stack);
     }
 }

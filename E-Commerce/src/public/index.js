@@ -1,4 +1,19 @@
+import Swal from 'sweetalert2'
+import Toastify from 'toastify-js'
 const socketClient = io();
+
+if(document.getElementById('registerBtn')) 
+    document.getElementById('registerBtn').addEventListener('click', function() {
+        location.href = '/register';
+    });
+if(document.getElementById('loginBtn'))
+    document.getElementById('loginBtn').addEventListener('click', function() {
+    location.href = '/login';
+  });
+if(document.getElementById('githubBtn'))
+    document.getElementById('githubBtn').addEventListener('click', function() {
+    location.href = '/api/users/github';
+  });
 
 /* ---------------------------------- chat ---------------------------------- */
 if(location.pathname == '/chat'){

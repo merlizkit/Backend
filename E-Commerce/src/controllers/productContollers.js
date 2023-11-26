@@ -1,4 +1,6 @@
+import { sendMail } from '../services/mailingServices.js';
 import * as service from '../services/productServices.js';
+import * as userService from '../services/userServices.js';
 
 
 export const getAll = async (req, res, next) => {
@@ -74,7 +76,11 @@ export const remove = async (req, res, next) => {
             else { 
                 const prodDel = await service.remove(pid);
                 if(!prodDel) { return res.status(404).json({msg: 'Not found'});}
-                    else {return res.status(200).json(prodDel);}
+                    else {
+                        const userExists = await userService.find({email: authDel.owner})
+                        if(userExists) await sendMail(userExists[0], 'userDeleted')
+                        return res.status(200).json(prodDel);
+                    }
                 };
         }
         catch (error) {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getByIdDTO, logout, resetPass, updatePass, updateRole, docUpload } from "../controllers/userControllers.js";
+import { getAllDTO, getByIdDTO, logout, resetPass, updatePass, updateRole, docUpload, removeOld, removeById } from "../controllers/userControllers.js";
 import passport from 'passport';
 import { isAuth } from '../middlewares/isAuth.js';
 import { uploader } from '../middlewares/multer.js';
@@ -29,5 +29,9 @@ router
         successRedirect: '/products',
         passReqToCallback: true
         }), getByIdDTO)
+    .get('/', getAllDTO)
 
+    .delete('/', isAuth, removeOld)
+    .delete('/:uid', isAuth, removeById)
+    
 export default router;
