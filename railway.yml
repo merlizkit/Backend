@@ -3,4 +3,4 @@ services:
   - name: E-Commerce
     github:
       branch: main
-      folder: Backend/E-Commerce
+      folder: merlizkit/Backend/E-Commerce
