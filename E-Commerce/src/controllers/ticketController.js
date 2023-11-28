@@ -22,7 +22,6 @@ export default class TicketController extends Controllers {
         try {
             const { email } = req.user
             const response = await ticketServices.findByUser({purchaser: email});
-            console.log({tickets: response});
             res.render('tickets',{tickets: response});
         } catch (error) {
             req.logger.error(error.message);

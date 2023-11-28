@@ -26,7 +26,6 @@ export const getUsersDTO = async (req, res, next) => {
     try {
         const users = await userService.getAllDTO();
         const response = { users };
-        console.log(response);
         res.render('adminmenu', response);
     }
     catch (error) {
