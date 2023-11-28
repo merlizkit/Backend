@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export default {
     PORT : process.env.PORT || 8080,
-    URL: process.env.URL,
+    URL: '0.0.0.0' || process.env.URL,
     ENVIRONMENT : process.env.ENVIRONMENT || 'development',
     PERSISTENCE: process.env.PERSISTENCE,
 

@@ -54,7 +54,7 @@ app
 initializePassport();
 
 const PORT = config.PORT || 8080;
-const httpServer = app.listen(PORT, ()=>{
+const httpServer = app.listen(PORT, config.URL, ()=>{
     logger2.info(`Server listening on port ${PORT}: ${config.URL}:${PORT}`);
 });
 
