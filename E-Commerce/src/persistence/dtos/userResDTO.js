@@ -5,7 +5,7 @@ export default class UserResDTO {
         this.email = user.email
         this.age = user.age
         this.role = user.role
-        //this.cartId = user.cartId.toString()
+        this.cartId = user.cartId.toString()
         this.last_connection = user.last_connection
         this._id = user._id
     }
