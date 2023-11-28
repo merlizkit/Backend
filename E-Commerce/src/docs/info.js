@@ -12,11 +12,11 @@ export const info = {
             <br>
             Antes de hacer las pruebas, loguearse desde el enpoint de users/login:<br>
             Usuario comun: <br>
-                - email: user@gmail.com<br>
+                - email: merlizkit@gmail.com<br>
                 - password: 12345<br>
             <br>
             Usuario premium: <br>
-                - email: premium@gmail.com<br>
+                - email: mmerlo@gmail.com<br>
                 - password: 12345`
         },
         servers: [

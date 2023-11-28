@@ -155,7 +155,14 @@ export default class UserDao extends MongoDao {
 
     async removeOld() {
         try {
-            const filter = {last_connection: {$lte: '2023-11-20'}}
+            // const filter = {last_connection: {$lte: '2023-11-20'}}
+            const filter = {
+                $and: [
+                    {role: {$ne: 'admin'}}, 
+                    {last_connection: { $lte: new Date(new Date().setDate(new Date().getDate() - 2))}}
+                ]
+            };
+            // const filter = {last_connection: {$lte: new Date(ISODate().getTime() - 1000 * 60 * 15)}}
             const mailDel = await this.find(filter)
             for (let index = 0; index < mailDel.length; index++) {
                 await sendMail(mailDel[index], 'userDeleted');

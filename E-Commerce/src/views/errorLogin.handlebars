@@ -2,3 +2,15 @@
 <div class="container w-50 d-flex justify-content-center">
     <button id="loginBtn" class="btn btn-primary w-25">Ir a inicio de sesión</button>
 </div>
+<br>
+<div class="container w-50">
+    <form method="POST" action="api/users/reset-pass">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="email">
+        </div>
+        <div class="container w-100 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary w-25">Restablecer contraseña</button>
+        </div>
+    </form>
+</div>

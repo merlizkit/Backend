@@ -16,7 +16,10 @@ const createMsgRegister = (first_name) => {
     return `<h1>Hola ${first_name}, Bienvenido</h1>`;
 };
 const createMsgReset = (first_name) => {
-    return `<h1>Hola ${first_name}, hace click <a href='${config.URL}:${config.PORT}/api/users/new-pass'>AQUI</a> para reestablecer la contraseña</h1>`;
+    return `<h1>Hola ${first_name}, hace click en el botón para reestablecer la contraseña</h1>
+            <form method="POST" action="${config.URL}:${config.PORT}/api/users/new-pass?_method=PUT" class="container w-100 d-flex justify-content-center">
+                <button type="submit" class="btn btn-light w-25">Establecer nuevo password</button>
+            </form>`;
 };
 const createMsgDelete = (first_name) => {
     return `<h1>Hola ${first_name}, te informamos que tu usuario fue borrado por no ser utilizado</h1>`;
