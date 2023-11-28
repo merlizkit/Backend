@@ -1,3 +1,5 @@
+import config from '../config/config.js';
+
 export const info = {
     definition: {
         openapi: '3.0.0',
