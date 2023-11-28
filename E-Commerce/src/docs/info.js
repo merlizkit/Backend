@@ -21,7 +21,7 @@ export const info = {
         },
         servers: [
             {
-                url: config.URL
+                url: `${config.URL}:${config.PORT}`
             }
         ]
     },

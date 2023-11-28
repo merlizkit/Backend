@@ -29,7 +29,7 @@ export const initializePassport = () => {
                 return done(null, userExists);
             }
             catch (error) {
-                req.logger.error(error.message);
+                return done("Error at getting user: " + error);
             }
         }
     ))

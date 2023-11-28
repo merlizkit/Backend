@@ -72,11 +72,12 @@ paths:
       tags:
       - Products
       summary: Obtener un producto por ID
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/parameters/schemas/getProduct"
+      parameters:
+      - in: path
+        name: pid
+        required: true
+        schema:
+          $ref: "#/components/parameters/schemas/getProduct"
       responses:
         200:
           description: OK

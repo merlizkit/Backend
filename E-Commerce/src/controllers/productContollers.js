@@ -29,7 +29,7 @@ export const create = async (req, res, next) => {
         try {
             let owner;
             let newProd;
-            const thumbnails = req.files.map(thumb => thumb.path);
+            if(req.files) {const thumbnails = req.files.map(thumb => thumb.path);}
             if(req.user.role != 'admin') { owner = req.user.email};
             if(typeof req.body === 'object') {
                 newProd = await service.create(

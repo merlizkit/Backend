@@ -38,7 +38,9 @@ app
     .use(logger)
     .use(helmet())
     .use('/docs', swaggerUI.serve, swaggerUI.setup(specs))
-    .use(cors())
+    .use(cors({
+        origin: 'https://latienda.up.railway.app'
+    }))
 
     .engine('handlebars', hbs.engine)
     .set('view engine', 'handlebars')
