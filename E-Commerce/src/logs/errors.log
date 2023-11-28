@@ -39,3 +39,12 @@ error | 20231127 21:06:22 | Cart update error: An error occurred while fetching 
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async Module.getCartById (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/cartServices.js:19:22)
     at async getCart (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/controllers/viewControllers.js:17:26)
+error | 20231127 22:16:25 | Error: ReferenceError: config is not defined
+    at ProductDaoMongoDB.getProductsPag (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/persistence/daos/mongodb/productDao.js:76:24)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Module.getAll (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/productServices.js:10:26)
+    at async getAll (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/controllers/viewControllers.js:7:26)
+    at ProductDaoMongoDB.getProductsPag (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/persistence/daos/mongodb/productDao.js:88:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Module.getAll (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/productServices.js:10:26)
+    at async getAll (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/controllers/viewControllers.js:7:26)

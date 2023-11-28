@@ -3,6 +3,7 @@ import CustomError from "../../../services/errors/customErrors.js";
 import EErrors from "../../../services/errors/enums.js";
 import { genCartErrorMissProduct, genProdErrorCodeExists, genProdErrorMissParam } from "../../../services/errors/info.js";
 import { ProductModel } from "./models/productModel.js";
+import config from '../../../config/config.js';
 
 // export default class ProductDaoMongoDB extends MongoDao {
 //     constructor() {

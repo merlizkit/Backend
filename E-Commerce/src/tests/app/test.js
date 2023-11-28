@@ -4,6 +4,7 @@ import app from '../../server.js';
 import { describe, test } from 'node:test';
 import assert from 'node:assert';
 import { fakerES as faker } from '@faker-js/faker';
+import config from '../../config/config.js';
 
 const apiURL = `${config.URL}:${config.PORT}/api/products`;
 
