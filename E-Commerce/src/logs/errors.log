@@ -26,3 +26,16 @@ error | 20231014 12:41:12 | token is not defined
 error | 20231014 12:41:41 | token is not defined
 error | 20231014 12:42:11 | token is not defined
 error | 20231014 12:43:50 | token is not defined
+error | 20231127 20:51:24 | Cannot destructure property 'email' of 'req.user' as it is undefined.
+error | 20231127 21:02:33 | Cart update error: An error occurred while fetching the cart
+    at CustomError.createError (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/errors/customErrors.js:3:23)
+    at CartDaoMongoDB.getCartById (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/persistence/daos/mongodb/cartDao.js:37:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Module.getCartById (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/cartServices.js:19:22)
+    at async getCart (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/controllers/viewControllers.js:17:26)
+error | 20231127 21:06:22 | Cart update error: An error occurred while fetching the cart
+    at CustomError.createError (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/errors/customErrors.js:3:23)
+    at CartDaoMongoDB.getCartById (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/persistence/daos/mongodb/cartDao.js:37:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Module.getCartById (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/services/cartServices.js:19:22)
+    at async getCart (file:///D:/Personal/Coder/Backend/Desaf%C3%ADos/E-Commerce/src/controllers/viewControllers.js:17:26)

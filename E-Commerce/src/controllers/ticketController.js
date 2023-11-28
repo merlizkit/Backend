@@ -12,7 +12,7 @@ export default class TicketController extends Controllers {
             const { id: userId } = req.user;
             const ticket = await ticketServices.generateTicket(userId);
             if(!ticket) res.status(404).json({msg: 'Error generating ticket'});
-            res.redirect('/tickets');
+            res.redirect('/api/tickets');
         } catch (error) {
             req.logger.error(error.message);
         }
