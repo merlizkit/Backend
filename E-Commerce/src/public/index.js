@@ -1,5 +1,3 @@
-import Swal from 'sweetalert2'
-import Toastify from 'toastify-js'
 const socketClient = io();
 
 if(document.getElementById('registerBtn')) 
