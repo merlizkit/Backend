@@ -37,7 +37,7 @@ export const initializePassport = () => {
     passport.use('github', new GitHubStrategy({
         clientID: config.CLIENT_ID,
         clientSecret: config.CLIENT_SECRET,
-        callbackURL: `${config.URL}:${config.PORT}/api/users/githubcallback`
+        callbackURL: `${config.URL}/api/users/githubcallback`
         }, async (accessToken, refreshToken, profile, done) => {
             try {
                 const userExists = await userDao.getByEmail(profile._json.email);
