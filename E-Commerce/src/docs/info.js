@@ -19,7 +19,7 @@ export const info = {
         },
         servers: [
             {
-                url: 'http://localhost:8080'
+                url: config.URL
             }
         ]
     },

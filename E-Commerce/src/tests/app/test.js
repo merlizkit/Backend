@@ -5,7 +5,7 @@ import { describe, test } from 'node:test';
 import assert from 'node:assert';
 import { fakerES as faker } from '@faker-js/faker';
 
-const apiURL = 'http://localhost:8080/api/products';
+const apiURL = `${config.URL}:${config.PORT}/api/products`;
 
 describe('Test /api/product', () => {
 
